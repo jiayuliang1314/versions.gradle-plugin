@@ -1,0 +1,94 @@
+CREATE TABLE `job_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `company_name` text DEFAULT NULL COMMENT '公司名称',
+  `companyid` text DEFAULT NULL COMMENT '公司ID',
+  `payperiod` text COMMENT '工资周期',
+  `job_name` text DEFAULT NULL COMMENT '职位名称',
+  `job_addr` text DEFAULT NULL COMMENT '工作地点',
+  `jobid` text COMMENT '职位ID',
+  `salary_min` bigint(20) DEFAULT NULL COMMENT '薪资范围，最小',
+  `salary_max` bigint(20) DEFAULT NULL COMMENT '薪资范围，最大',
+  `jobdetail` text DEFAULT NULL COMMENT '招聘信息详情',
+  `time` text DEFAULT NULL COMMENT '职位最近发布时间',
+  `search_text` text DEFAULT NULL COMMENT '查询',
+  `search_date` text DEFAULT NULL COMMENT '查询时间的日期',
+  `normalizedjobtitle` text DEFAULT NULL COMMENT '正规的职位类别',
+  `job_category` bigint(20) DEFAULT NULL COMMENT '职位类别id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='招聘信息';
+
+
+    private Long id;
+    private String companyName;
+    private String companyWebsitOnGreenHouse;
+    private String companyWebsit;
+    private Long glassdoorId;
+
+CREATE TABLE `company_use_green_house` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `company_name` text DEFAULT NULL COMMENT '公司名称',
+  `company_websit_on_green_house` text DEFAULT NULL COMMENT '公司',
+  `company_websit` text DEFAULT NULL COMMENT '公司',
+  `glassdoor_id` bigint(20) DEFAULT NULL COMMENT 'id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='公司';
+
+select distinct
+#                 l.job_name,
+                l.normalizedjobtitle,
+                l.job_category,
+                r.job_category_counts
+from job_info l,
+     (select distinct job_category, count(*) job_category_counts
+      from job_info
+      group by job_info.job_category
+      order by count(*) desc) r
+where l.job_category = r.job_category
+  and l.job_category = 10122
+order by r.job_category_counts desc, l.normalizedjobtitle, l.job_name
+
+select distinct l.job_name,
+                l.normalizedjobtitle,
+                rr.normalizedjobtitle_jobcounts,
+                l.job_category,
+                r.job_category_counts
+from job_info l,
+     (select distinct job_category, count(*) job_category_counts
+      from job_info
+      group by job_info.job_category
+      order by count(*) desc) r,
+     (select distinct job_info.normalizedjobtitle, count(*) normalizedjobtitle_jobcounts
+      from job_info
+      group by job_info.normalizedjobtitle
+      order by count(*) desc) rr
+where l.job_category = r.job_category
+  and l.normalizedjobtitle = rr.normalizedjobtitle
+order by r.job_category_counts desc
+       , rr.normalizedjobtitle_jobcounts desc
+
+职位报表，公司部分
+       select j.company_name,
+              j.companyid,
+              count(distinct j.jobid),
+              cughp.website,
+              cughp.hq,
+              cughp.industry,
+              cughp.industry_category,
+              cughp.revenue,
+              cughp.size
+       from job_info j
+                left join company_use_green_house_pro cughp on j.companyid = cughp.employer_id
+       where j.search_date = '2020-08-29'
+         and j.search_text = 'Sales'
+       group by j.company_name, j.companyid
+       order by count(distinct j.jobid) desc;
+
+//update数据从一个表到另外一个表中
+//https://blog.csdn.net/zhanghaisong_2015/article/details/78732239
+update mybatis.company_use_green_house_pro c
+set glassdoor_logo=
+        (select e.squareLogo
+         from glassdoordb.overviewvo e
+         where e.employerId = c.employer_id
+        )
+where exists(select 1 from glassdoordb.overviewvo e where e.employerId = c.employer_id)

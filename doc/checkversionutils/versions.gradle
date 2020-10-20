@@ -1,0 +1,251 @@
+ext.deps = [:]
+def versions = [:]
+versions.androidx = "1.1.0"
+versions.navigation = "2.1.0"
+versions.lifecycle = "2.1.0"
+versions.viewpager2 = "1.0.0"
+versions.commonMarkVersion = "0.12.1"
+versions.support = "28.0.0"
+versions.multidex = "1.0.1"
+versions.android_gradle_plugin = "3.5.0"
+versions.tinker_gradle_plugin = "1.2.0"
+versions.umeng = "6.1.2"
+versions.stetho = "1.3.0"
+versions.bugly_report = "1.4.2"
+versions.bugly_tinker = "1.9.14.5"
+versions.bugly_native = "3.6.0.1"
+versions.walle = "1.0.3"
+versions.tlog = "1.1.5"
+versions.ucrop = "2.2.1"
+versions.fastjson = "1.2.49"
+versions.oss = "2.5.0"
+versions.badger = "1.1.21@aar"
+versions.wechat = "5.4.3"
+versions.piasy = "1.5.6"
+//versions.amap_map2d = "5.2.0"
+versions.amap_map3d = "7.1.0"
+versions.amap_search = "7.1.0"
+versions.amap_location = "4.7.2"
+versions.fresco = "1.10.0"
+versions.nineoldandroids = "2.4.0"
+versions.huawei = "5.0.0.300"
+versions.qbusict = "2.2.0"
+versions.soloader = "0.5.0"
+versions.flexbox = "1.0.0"
+versions.okhttp3 = "3.12.4"
+versions.gson = "2.7"
+versions.nimlib = "4.4.0"
+versions.constraint_layout = "1.1.0"
+versions.luban = "1.1.8"
+versions.zxing = "3.3.0"
+versions.espresso = "2.2.2"
+versions.kit = "4.2.8.3.5.4"
+versions.kit_no_op = "4.2.8.3.5.4"
+versions.dd = "1.1.0"
+versions.lottie = "3.0.7"
+versions.apm = "0.9.9"
+versions.matrix = "0.9.3"
+versions.gallery = "0.3.35"
+versions.wmrouter = "1.2.0"
+versions.zpui = "0.0.842"
+versions.kotlin = '1.3.10'
+versions.kotlin_coroutines = "1.1.1"
+versions.aspectjx = "2.0.0"
+versions.aspectjrt = "1.9.4"
+versions.aspectjtools = "1.8.13"
+versions.room = "1.1.1"
+versions.wcdb_room = "1.0.8"
+versions.liteav = "7.2.8927"
+versions.imsdk = "4.8.10"
+def deps = [:]
+
+def zhipin = [:]
+zhipin.fresco_image_loader = "com.twl.zhipin:fresco-image-loader:0.0.2"
+zhipin.mqtt_service = "com.twl.zhipin:mqtt-service:0.0.8_exclude_legacy"
+zhipin.magicindicator = "com.twl.zhipin:magicindicator:0.0.2"
+zhipin.file_selecter = "com.twl.zhipin:file-selecter:0.0.2"
+deps.zhipin = zhipin
+
+def commonmark = [:]
+commonmark.commonmark = "com.atlassian.commonmark:commonmark:$versions.commonMarkVersion"
+commonmark.commonmark_strikethrough = "com.atlassian.commonmark:commonmark-ext-gfm-strikethrough:$versions.commonMarkVersion"
+commonmark.commonmark_table = "com.atlassian.commonmark:commonmark-ext-gfm-tables:$versions.commonMarkVersion"
+deps.commonmark = commonmark
+
+def androidx = [:]
+androidx.recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
+androidx.annotation = "androidx.annotation:annotation:$versions.androidx"
+androidx.core = "androidx.core:core:$versions.androidx"
+androidx.navigation_fragment = "androidx.navigation:navigation-fragment:$versions.navigation"
+androidx.navigation_ui = "androidx.navigation:navigation-ui:$versions.navigation"
+deps.androidx = androidx
+deps.viewpager2 = "androidx.viewpager2:viewpager2:$versions.viewpager2"
+
+def lifecycle = [:]
+lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+lifecycle.livedata = "androidx.lifecycle:lifecycle-livedata:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+
+def support = [:]
+support.annotations = "androidx.annotation:annotation:$versions.androidx"
+support.app_compat = "androidx.appcompat:appcompat:$versions.androidx"
+support.cardview = "androidx.cardview:cardview:1.0.0"
+support.design = "com.google.android.material:material:1.0.0"
+deps.support = support
+
+def espresso = [:]
+espresso.core = 'androidx.test.espresso:espresso-core:3.1.0'
+deps.espresso = espresso
+
+def atsl = [:]
+atsl.runner = "androidx.test:runner:$versions.atsl_runner"
+atsl.rules = "androidx.test:rules:$versions.atsl_runner"
+deps.atsl = atsl
+
+def bugly = [:]
+bugly.report = "com.tencent.bugly:crashreport_upgrade:$versions.bugly_report"
+bugly.bugly_native = "com.tencent.bugly:nativecrashreport:$versions.bugly_native"
+bugly.bugly_tinker = "com.tencent.tinker:tinker-android-lib:$versions.bugly_tinker"
+deps.bugly = bugly
+
+def piasy = [:]
+piasy.viewer = "com.github.piasy:BigImageViewer:$versions.piasy"
+piasy.loader = "com.github.piasy:FrescoImageLoader:$versions.piasy"
+piasy.indicator = "com.github.piasy:ProgressPieIndicator:$versions.piasy"
+deps.piasy = piasy
+
+def amap = [:]
+//amap.map2d = "com.amap.api:map2d:$versions.amap_map2d"
+amap.map3d = "com.amap.api:3dmap:$versions.amap_map3d"
+amap.search = "com.amap.api:search:$versions.amap_search"
+amap.location = "com.amap.api:location:$versions.amap_location"
+deps.amap = amap
+
+
+def fresco = [:]
+fresco.fresco = "com.facebook.fresco:fresco:$versions.fresco"
+fresco.animated_gif = "com.facebook.fresco:animated-gif:$versions.fresco"
+fresco.okhttp = "com.facebook.fresco:imagepipeline-okhttp3:$versions.fresco"
+deps.fresco = fresco
+
+def nimlib = [:]
+nimlib.basesdk = "com.netease.nimlib:basesdk:$versions.nimlib"
+nimlib.nrtc = "com.netease.nimlib:nrtc:$versions.nimlib"
+nimlib.avchat = "com.netease.nimlib:avchat:$versions.nimlib"
+deps.nimlib = nimlib
+
+def kotlin = [:]
+kotlin.kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+kotlin.kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+kotlin.coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlin_coroutines"
+kotlin.coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlin_coroutines"
+kotlin.aspectjx = "com.hujiang.aspectjx:gradle-android-plugin-aspectjx:$versions.aspectjx"
+kotlin.aspectjrt = "org.aspectj:aspectjrt:$versions.aspectjrt"
+kotlin.aspectjtools = "org.aspectj:aspectjtools:$versions.aspectjtools"
+deps.kotlin = kotlin
+
+def room = [:]
+room.compiler = 'androidx.room:room-compiler:2.1.0'
+room.runtime = 'androidx.room:room-runtime:2.1.0'
+deps.room = room
+
+def matrix = [:]
+matrix.trace_canary = "com.hpbr.bosszhipin:matrix-trace-canary:$versions.matrix"
+matrix.trace_canary_no_op = "com.hpbr.bosszhipin:matrix-trace-canary-no-op:$versions.matrix"
+matrix.resource_canary_android = "com.hpbr.bosszhipin:matrix-resource-canary-android:$versions.matrix"
+matrix.resource_canary_android_no_op = "com.hpbr.bosszhipin:matrix-resource-canary-android-no-op:$versions.matrix"
+deps.matrix = matrix
+
+deps.multidex = 'androidx.multidex:multidex:2.0.0'
+deps.umeng = "com.umeng.analytics:analytics:$versions.umeng"
+deps.zxing = "com.google.zxing:core:$versions.zxing"
+deps.stetho = "com.facebook.stetho:stetho:$versions.stetho"
+deps.walle = "com.meituan.android.walle:payload_reader:$versions.walle"
+deps.tlog = "com.techwolf.lib:tlog:$versions.tlog"
+deps.ucrop = "com.github.yalantis:ucrop:$versions.ucrop"
+deps.fastjson = "com.alibaba:fastjson:$versions.fastjson"
+deps.badger = "me.leolin:ShortcutBadger:$versions.badger"
+deps.wechat = "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:$versions.wechat"
+deps.nineoldandroids = "com.nineoldandroids:library:$versions.nineoldandroids"
+deps.huawei = "com.huawei.hms:push:$versions.huawei"
+deps.qbusict = "nl.qbusict:cupboard:$versions.qbusict"
+deps.soloader = "com.facebook.soloader:soloader:$versions.soloader"
+deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
+deps.okhttp3 = "com.squareup.okhttp3:okhttp:$versions.okhttp3"
+
+deps.gson = "com.google.code.gson:gson:$versions.gson"
+deps.constraint_layout = 'androidx.constraintlayout:constraintlayout:1.1.3'
+deps.luban = "top.zibin:Luban:$versions.luban"
+deps.gallery = "com.hpbr.bosszhipin:module-gallery:$versions.gallery"
+deps.kit = "com.hpbr.bosszhipin:module-kit:$versions.kit"
+deps.kit_no_op = "com.hpbr.bosszhipin:module-kit-no-op:$versions.kit_no_op"
+deps.apm = "com.hpbr.bosszhipin:module-apm:$versions.apm"
+deps.dd = "com.alibaba.android:ddsharesdk:$versions.dd"
+deps.lottie = "com.airbnb.android:lottie:$versions.lottie"
+deps.wmrouter = "com.sankuai.waimai.router:router:$versions.wmrouter"
+deps.wmrouter_compiler = "com.sankuai.waimai.router:compiler:$versions.wmrouter"
+
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.tinker_gradle_plugin = "com.tencent.bugly:tinker-support:$versions.tinker_gradle_plugin"
+deps.wmrouter_gradle_plugin = "com.sankuai.waimai.router:plugin:$versions.wmrouter"
+deps.zpui = "com.hpbr.bosszhipin:module-zpui:$versions.zpui"
+deps.wcdb_room = "com.tencent.wcdb:room:$versions.wcdb_room"
+deps.baseRecyclerView = "com.github.jiayuliang1314:StrongToolsRecyclerView:2.9"
+
+deps.aliplayer = "com.aliyun.sdk.android:AliyunPlayer:4.5.0-full"
+deps.AlivcConan = "com.alivc.conan:AlivcConan:0.9.5"
+
+deps.liteav = "com.tencent.liteav:LiteAVSDK_Professional:$versions.liteav"
+deps.imsdk = "com.tencent.imsdk:imsdk:$versions.imsdk"
+
+deps.shimmer = 'com.facebook.shimmer:shimmer:0.5.0'
+
+ext.deps = deps
+
+
+def build_versions = [:]
+build_versions.min_sdk = 17
+build_versions.target_sdk = 26
+build_versions.compile_sdk = 28
+build_versions.build_tools = "28.0.3"
+ext.build_versions = build_versions
+
+static def addPluginRepos(RepositoryHandler handler) {
+    handler.maven { url "https://android2.weizhipin.com/nexus/repository/public/" }
+//    handler.maven {
+//        url "https://maven.aliyun.com/repository/jcenter"
+//    }
+//    handler.maven {
+//        url "https://maven.aliyun.com/repository/google"
+//    }
+//    handler.maven {
+//        url "https://developer.huawei.com/repo/"
+//    }
+//    handler.maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+////    handler.maven { url "https://android2.weizhipin.com/nexus/repository/releases/" }
+//    handler.google()
+}
+
+def addRepos(RepositoryHandler handler) {
+    handler.flatDir { dirs "$projectDir/libs" }
+    handler.maven{ url uri("$rootProject.rootDir/.local")}
+    handler.maven { url "https://android2.weizhipin.com/nexus/repository/public/" }
+//    handler.maven { url "https://android2.weizhipin.com/nexus/repository/releases/" }
+//    handler.maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+//    handler.maven { url 'https://maven.aliyun.com/repository/central' }
+//    handler.maven { url 'https://maven.aliyun.com/repository/google' }
+//    handler.maven { url 'https://maven.aliyun.com/repository/jcenter' }
+    // Techwolf Maven服务器URL
+
+//    handler.maven { url "http://dl.bintray.com/piasy/maven" }
+//    handler.maven { url 'https://jitpack.io' }
+//    handler.maven { url 'http://developer.huawei.com/repo/' }
+
+//    handler.jcenter()
+//    handler.mavenCentral()
+//    handler.google()
+}
+
+ext.addRepos = this.&addRepos
+ext.addPluginRepos = this.&addPluginRepos

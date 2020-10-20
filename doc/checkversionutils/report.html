@@ -1,0 +1,718 @@
+<html>
+<body>
+<h1>功能：</h1>1.  依赖最新版本号列表 给出链接，点击跳转到网页<br>2.  versions.gradle 文件格式化<br>3.  versions.gradle 按行给出最新版本提示<br>4.  依赖去重复 <font color="red"> -> duplicate library,can delete!!! </font><br>5.  多个依赖使用同一个版本，但是他们有独立的版本号 ，给出提示  <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>    例如：androidx.annotation = "androidx.annotation:annotation:$versions.androidx"         androidx.core = "androidx.core:core:$versions.androidx" 都使用了$versions.androidx，但他们的最新版本号不同<br><br><br><table border="1">
+<tr>
+<td>Library Name</td>
+<td>Version</td>
+<td>Version Listed</td>
+<td>Version Latest</td>
+<td>Link</td>
+<td>ManyLibUseSameVersionButTheyAreNotSame</td>
+</tr>
+<tr>
+<td>com.twl.zhipin:fresco-image-loader</td>
+<td>0.0.2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.twl.zhipin:mqtt-service</td>
+<td>0.0.8_exclude_legacy</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.twl.zhipin:magicindicator</td>
+<td>0.0.2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.twl.zhipin:file-selecter</td>
+<td>0.0.2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.atlassian.commonmark:commonmark</td>
+<td>$versions.commonMarkVersion</td>
+<td>0.12.1</td>
+<td>0.15.2</td>
+<td> <a href="https://mvnrepository.com/artifact/com.atlassian.commonmark/commonmark">https://mvnrepository.com/artifact/com.atlassian.commonmark/commonmark 0.15.2</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.atlassian.commonmark:commonmark-ext-gfm-strikethrough</td>
+<td>$versions.commonMarkVersion</td>
+<td>0.12.1</td>
+<td>0.15.2</td>
+<td> <a href="https://mvnrepository.com/artifact/com.atlassian.commonmark/commonmark-ext-gfm-strikethrough">https://mvnrepository.com/artifact/com.atlassian.commonmark/commonmark-ext-gfm-strikethrough 0.15.2</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.atlassian.commonmark:commonmark-ext-gfm-tables</td>
+<td>$versions.commonMarkVersion</td>
+<td>0.12.1</td>
+<td>0.15.2</td>
+<td> <a href="https://mvnrepository.com/artifact/com.atlassian.commonmark/commonmark-ext-gfm-tables">https://mvnrepository.com/artifact/com.atlassian.commonmark/commonmark-ext-gfm-tables 0.15.2</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.recyclerview:recyclerview</td>
+<td>1.0.0</td>
+<td></td>
+<td>1.1.0</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.recyclerview/recyclerview">https://mvnrepository.com/artifact/androidx.recyclerview/recyclerview 1.1.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.annotation:annotation</td>
+<td>$versions.androidx</td>
+<td>1.1.0</td>
+<td>1.1.0</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.annotation/annotation">https://mvnrepository.com/artifact/androidx.annotation/annotation 1.1.0</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>androidx.core:core</td>
+<td>$versions.androidx</td>
+<td>1.1.0</td>
+<td>1.3.2</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.core/core">https://mvnrepository.com/artifact/androidx.core/core 1.3.2</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>androidx.navigation:navigation-fragment</td>
+<td>$versions.navigation</td>
+<td>2.1.0</td>
+<td>2.3.1</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.navigation/navigation-fragment">https://mvnrepository.com/artifact/androidx.navigation/navigation-fragment 2.3.1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.navigation:navigation-ui</td>
+<td>$versions.navigation</td>
+<td>2.1.0</td>
+<td>2.3.1</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.navigation/navigation-ui">https://mvnrepository.com/artifact/androidx.navigation/navigation-ui 2.3.1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.viewpager2:viewpager2</td>
+<td>$versions.viewpager2</td>
+<td>1.0.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.lifecycle:lifecycle-extensions</td>
+<td>$versions.lifecycle</td>
+<td>2.1.0</td>
+<td>2.2.0</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions">https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions 2.2.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.lifecycle:lifecycle-livedata</td>
+<td>$versions.lifecycle</td>
+<td>2.1.0</td>
+<td>2.2.0</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-livedata">https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-livedata 2.2.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.appcompat:appcompat</td>
+<td>$versions.androidx</td>
+<td>1.1.0</td>
+<td>1.2.0</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.appcompat/appcompat">https://mvnrepository.com/artifact/androidx.appcompat/appcompat 1.2.0</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>androidx.cardview:cardview</td>
+<td>1.0.0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.google.android.material:material</td>
+<td>1.0.0</td>
+<td></td>
+<td>1.2.1</td>
+<td> <a href="https://mvnrepository.com/artifact/com.google.android.material/material">https://mvnrepository.com/artifact/com.google.android.material/material 1.2.1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.test.espresso:espresso-core</td>
+<td>3.1.0</td>
+<td></td>
+<td>3.3.0</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.test.espresso/espresso-core">https://mvnrepository.com/artifact/androidx.test.espresso/espresso-core 3.3.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.test:runner</td>
+<td>$versions.atsl_runner</td>
+<td></td>
+<td>1.3.0</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.test/runner">https://mvnrepository.com/artifact/androidx.test/runner 1.3.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.test:rules</td>
+<td>$versions.atsl_runner</td>
+<td></td>
+<td>1.3.0</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.test/rules">https://mvnrepository.com/artifact/androidx.test/rules 1.3.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.tencent.bugly:crashreport_upgrade</td>
+<td>$versions.bugly_report</td>
+<td>1.4.2</td>
+<td>1.3.1 1.4.5</td>
+<td> <a href="https://mvnrepository.com/artifact/com.tencent.bugly/crashreport_upgrade">https://mvnrepository.com/artifact/com.tencent.bugly/crashreport_upgrade 1.3.1</a> <br> <a href="https://mvnrepository.com/artifact/com.tencent.bugly/crashreport_upgrade?repo=jcenter">https://mvnrepository.com/artifact/com.tencent.bugly/crashreport_upgrade?repo=jcenter 1.4.5</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.tencent.bugly:nativecrashreport</td>
+<td>$versions.bugly_native</td>
+<td>3.6.0.1</td>
+<td>3.6.0.1 3.7.471 3.7.47</td>
+<td> <a href="https://mvnrepository.com/artifact/com.tencent.bugly/nativecrashreport">https://mvnrepository.com/artifact/com.tencent.bugly/nativecrashreport 3.6.0.1</a> <br> <a href="https://mvnrepository.com/artifact/com.tencent.bugly/nativecrashreport?repo=pentaho-omni">https://mvnrepository.com/artifact/com.tencent.bugly/nativecrashreport?repo=pentaho-omni 3.7.471</a> <br> <a href="https://mvnrepository.com/artifact/com.tencent.bugly/nativecrashreport?repo=jcenter">https://mvnrepository.com/artifact/com.tencent.bugly/nativecrashreport?repo=jcenter 3.7.47</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.tencent.tinker:tinker-android-lib</td>
+<td>$versions.bugly_tinker</td>
+<td>1.9.14.5</td>
+<td>1.9.14.7 1.9.14.8</td>
+<td> <a href="https://mvnrepository.com/artifact/com.tencent.tinker/tinker-android-lib">https://mvnrepository.com/artifact/com.tencent.tinker/tinker-android-lib 1.9.14.7</a> <br> <a href="https://mvnrepository.com/artifact/com.tencent.tinker/tinker-android-lib?repo=jcenter">https://mvnrepository.com/artifact/com.tencent.tinker/tinker-android-lib?repo=jcenter 1.9.14.8</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.github.piasy:BigImageViewer</td>
+<td>$versions.piasy</td>
+<td>1.5.6</td>
+<td>1.5.7</td>
+<td> <a href="https://mvnrepository.com/artifact/com.github.piasy/BigImageViewer">https://mvnrepository.com/artifact/com.github.piasy/BigImageViewer 1.5.7</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>com.github.piasy:FrescoImageLoader</td>
+<td>$versions.piasy</td>
+<td>1.5.6</td>
+<td>1.4.4 1.7.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.github.piasy/FrescoImageLoader">https://mvnrepository.com/artifact/com.github.piasy/FrescoImageLoader 1.4.4</a> <br> <a href="https://mvnrepository.com/artifact/com.github.piasy/FrescoImageLoader?repo=jcenter">https://mvnrepository.com/artifact/com.github.piasy/FrescoImageLoader?repo=jcenter 1.7.0</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>com.github.piasy:ProgressPieIndicator</td>
+<td>$versions.piasy</td>
+<td>1.5.6</td>
+<td>null</td>
+<td></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>com.amap.api:map2d</td>
+<td>$versions.amap_map2d</td>
+<td></td>
+<td>6.0.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.amap.api/map2d">https://mvnrepository.com/artifact/com.amap.api/map2d 6.0.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.amap.api:3dmap</td>
+<td>$versions.amap_map3d</td>
+<td>7.1.0</td>
+<td>7.6.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.amap.api/3dmap">https://mvnrepository.com/artifact/com.amap.api/3dmap 7.6.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.amap.api:search</td>
+<td>$versions.amap_search</td>
+<td>7.1.0</td>
+<td>7.6.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.amap.api/search">https://mvnrepository.com/artifact/com.amap.api/search 7.6.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.amap.api:location</td>
+<td>$versions.amap_location</td>
+<td>4.7.2</td>
+<td>5.2.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.amap.api/location">https://mvnrepository.com/artifact/com.amap.api/location 5.2.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.facebook.fresco:fresco</td>
+<td>$versions.fresco</td>
+<td>1.10.0</td>
+<td>2.3.0 2.2.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.facebook.fresco/fresco">https://mvnrepository.com/artifact/com.facebook.fresco/fresco 2.3.0</a> <br> <a href="https://mvnrepository.com/artifact/com.facebook.fresco/fresco?repo=jcenter">https://mvnrepository.com/artifact/com.facebook.fresco/fresco?repo=jcenter 2.2.0</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>com.facebook.fresco:animated-gif</td>
+<td>$versions.fresco</td>
+<td>1.10.0</td>
+<td>2.3.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.facebook.fresco/animated-gif">https://mvnrepository.com/artifact/com.facebook.fresco/animated-gif 2.3.0</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>com.facebook.fresco:imagepipeline-okhttp3</td>
+<td>$versions.fresco</td>
+<td>1.10.0</td>
+<td>2.3.0 2.2.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.facebook.fresco/imagepipeline-okhttp3">https://mvnrepository.com/artifact/com.facebook.fresco/imagepipeline-okhttp3 2.3.0</a> <br> <a href="https://mvnrepository.com/artifact/com.facebook.fresco/imagepipeline-okhttp3?repo=jcenter">https://mvnrepository.com/artifact/com.facebook.fresco/imagepipeline-okhttp3?repo=jcenter 2.2.0</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>com.netease.nimlib:basesdk</td>
+<td>$versions.nimlib</td>
+<td>4.4.0</td>
+<td>7.7.1 8.0.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.netease.nimlib/basesdk">https://mvnrepository.com/artifact/com.netease.nimlib/basesdk 7.7.1</a> <br> <a href="https://mvnrepository.com/artifact/com.netease.nimlib/basesdk?repo=jcenter">https://mvnrepository.com/artifact/com.netease.nimlib/basesdk?repo=jcenter 8.0.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.netease.nimlib:nrtc</td>
+<td>$versions.nimlib</td>
+<td>4.4.0</td>
+<td>7.7.1 8.0.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.netease.nimlib/nrtc">https://mvnrepository.com/artifact/com.netease.nimlib/nrtc 7.7.1</a> <br> <a href="https://mvnrepository.com/artifact/com.netease.nimlib/nrtc?repo=jcenter">https://mvnrepository.com/artifact/com.netease.nimlib/nrtc?repo=jcenter 8.0.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.netease.nimlib:avchat</td>
+<td>$versions.nimlib</td>
+<td>4.4.0</td>
+<td>7.7.1 8.0.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.netease.nimlib/avchat">https://mvnrepository.com/artifact/com.netease.nimlib/avchat 7.7.1</a> <br> <a href="https://mvnrepository.com/artifact/com.netease.nimlib/avchat?repo=jcenter">https://mvnrepository.com/artifact/com.netease.nimlib/avchat?repo=jcenter 8.0.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>org.jetbrains.kotlin:kotlin-gradle-plugin</td>
+<td>$versions.kotlin</td>
+<td>1.3.10</td>
+<td>1.4.10  1.4.10-release-417 1.3.0-rc-131 1.4.0-rc-release-221 0.5.748 1.4.0-rc-87</td>
+<td> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin 1.4.10</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=gradle-plugins">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=gradle-plugins </a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-dev">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-dev 1.4.10-release-417</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-eap">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-eap 1.3.0-rc-131</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-plugin">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-plugin 1.4.0-rc-release-221</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin 0.5.748</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-bootstrap">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-bootstrap 1.4.0-rc-87</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>org.jetbrains.kotlin:kotlin-stdlib-jdk8</td>
+<td>$versions.kotlin</td>
+<td>1.3.10</td>
+<td>1.4.10 1.3.0-rc-131 1.4.0-rc-87 1.4.0-rc-release-221 1.4.10-release-417</td>
+<td> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8 1.4.10</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-eap">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-eap 1.3.0-rc-131</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-bootstrap">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-bootstrap 1.4.0-rc-87</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-plugin">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-plugin 1.4.0-rc-release-221</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-dev">https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-dev 1.4.10-release-417</a> <br></td>
+<td> <font color="green">Many Lib Use Same $Version, But They Are Not Same</font></td>
+</tr>
+<tr>
+<td>org.jetbrains.kotlinx:kotlinx-coroutines-core</td>
+<td>$versions.kotlin_coroutines</td>
+<td>1.1.1</td>
+<td>1.3.9 1.3.8-1.4.0-rc-218 1.3.8-1.4-rc-154</td>
+<td> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core">https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core 1.3.9</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core?repo=jcenter">https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core?repo=jcenter 1.3.8-1.4.0-rc-218</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core?repo=kotlinx">https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core?repo=kotlinx 1.3.8-1.4-rc-154</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>org.jetbrains.kotlinx:kotlinx-coroutines-android</td>
+<td>$versions.kotlin_coroutines</td>
+<td>1.1.1</td>
+<td>1.3.9 1.3.8-1.4.0-rc-218 1.3.8-1.4-rc-154</td>
+<td> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android">https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android 1.3.9</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android?repo=jcenter">https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android?repo=jcenter 1.3.8-1.4.0-rc-218</a> <br> <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android?repo=kotlinx">https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android?repo=kotlinx 1.3.8-1.4-rc-154</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hujiang.aspectjx:gradle-android-plugin-aspectjx</td>
+<td>$versions.aspectjx</td>
+<td>2.0.0</td>
+<td>2.0.10 2.0.8</td>
+<td> <a href="https://mvnrepository.com/artifact/com.hujiang.aspectjx/gradle-android-plugin-aspectjx">https://mvnrepository.com/artifact/com.hujiang.aspectjx/gradle-android-plugin-aspectjx 2.0.10</a> <br> <a href="https://mvnrepository.com/artifact/com.hujiang.aspectjx/gradle-android-plugin-aspectjx?repo=jcenter">https://mvnrepository.com/artifact/com.hujiang.aspectjx/gradle-android-plugin-aspectjx?repo=jcenter 2.0.8</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>org.aspectj:aspectjrt</td>
+<td>$versions.aspectjrt</td>
+<td>1.9.4</td>
+<td>1.9.6 1.9.2.RC3</td>
+<td> <a href="https://mvnrepository.com/artifact/org.aspectj/aspectjrt">https://mvnrepository.com/artifact/org.aspectj/aspectjrt 1.9.6</a> <br> <a href="https://mvnrepository.com/artifact/org.aspectj/aspectjrt?repo=alfresco-public">https://mvnrepository.com/artifact/org.aspectj/aspectjrt?repo=alfresco-public 1.9.2.RC3</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>org.aspectj:aspectjtools</td>
+<td>$versions.aspectjtools</td>
+<td>1.8.13</td>
+<td>1.9.6 1.9.2.RC3</td>
+<td> <a href="https://mvnrepository.com/artifact/org.aspectj/aspectjtools">https://mvnrepository.com/artifact/org.aspectj/aspectjtools 1.9.6</a> <br> <a href="https://mvnrepository.com/artifact/org.aspectj/aspectjtools?repo=alfresco-public">https://mvnrepository.com/artifact/org.aspectj/aspectjtools?repo=alfresco-public 1.9.2.RC3</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.room:room-compiler</td>
+<td>2.1.0</td>
+<td></td>
+<td>2.2.5</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.room/room-compiler">https://mvnrepository.com/artifact/androidx.room/room-compiler 2.2.5</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.room:room-runtime</td>
+<td>2.1.0</td>
+<td></td>
+<td>2.2.5</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.room/room-runtime">https://mvnrepository.com/artifact/androidx.room/room-runtime 2.2.5</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hpbr.bosszhipin:matrix-trace-canary</td>
+<td>$versions.matrix</td>
+<td>0.9.3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hpbr.bosszhipin:matrix-trace-canary-no-op</td>
+<td>$versions.matrix</td>
+<td>0.9.3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hpbr.bosszhipin:matrix-resource-canary-android</td>
+<td>$versions.matrix</td>
+<td>0.9.3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hpbr.bosszhipin:matrix-resource-canary-android-no-op</td>
+<td>$versions.matrix</td>
+<td>0.9.3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.multidex:multidex</td>
+<td>2.0.0</td>
+<td></td>
+<td>2.0.1</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.multidex/multidex">https://mvnrepository.com/artifact/androidx.multidex/multidex 2.0.1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.umeng.analytics:analytics</td>
+<td>$versions.umeng</td>
+<td>6.1.2</td>
+<td>6.1.4</td>
+<td> <a href="https://mvnrepository.com/artifact/com.umeng.analytics/analytics">https://mvnrepository.com/artifact/com.umeng.analytics/analytics 6.1.4</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.google.zxing:core</td>
+<td>$versions.zxing</td>
+<td>3.3.0</td>
+<td>3.4.1</td>
+<td> <a href="https://mvnrepository.com/artifact/com.google.zxing/core">https://mvnrepository.com/artifact/com.google.zxing/core 3.4.1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.facebook.stetho:stetho</td>
+<td>$versions.stetho</td>
+<td>1.3.0</td>
+<td>1.5.1</td>
+<td> <a href="https://mvnrepository.com/artifact/com.facebook.stetho/stetho">https://mvnrepository.com/artifact/com.facebook.stetho/stetho 1.5.1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.meituan.android.walle:payload_reader</td>
+<td>$versions.walle</td>
+<td>1.0.3</td>
+<td>1.1.6 1.1.7</td>
+<td> <a href="https://mvnrepository.com/artifact/com.meituan.android.walle/payload_reader">https://mvnrepository.com/artifact/com.meituan.android.walle/payload_reader 1.1.6</a> <br> <a href="https://mvnrepository.com/artifact/com.meituan.android.walle/payload_reader?repo=jcenter">https://mvnrepository.com/artifact/com.meituan.android.walle/payload_reader?repo=jcenter 1.1.7</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.techwolf.lib:tlog</td>
+<td>$versions.tlog</td>
+<td>1.1.5</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.github.yalantis:ucrop</td>
+<td>$versions.ucrop</td>
+<td>2.2.1</td>
+<td>2.2.1 2.2.5-native</td>
+<td> <a href="https://mvnrepository.com/artifact/com.github.yalantis/ucrop">https://mvnrepository.com/artifact/com.github.yalantis/ucrop 2.2.1</a> <br> <a href="https://mvnrepository.com/artifact/com.github.yalantis/ucrop?repo=mulesoft-public">https://mvnrepository.com/artifact/com.github.yalantis/ucrop?repo=mulesoft-public 2.2.5-native</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.alibaba:fastjson</td>
+<td>$versions.fastjson</td>
+<td>1.2.49</td>
+<td>1.2.74</td>
+<td> <a href="https://mvnrepository.com/artifact/com.alibaba/fastjson">https://mvnrepository.com/artifact/com.alibaba/fastjson 1.2.74</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>me.leolin:ShortcutBadger</td>
+<td>$versions.badger</td>
+<td>1.1.21@aar</td>
+<td>1.1.22</td>
+<td> <a href="https://mvnrepository.com/artifact/me.leolin/ShortcutBadger">https://mvnrepository.com/artifact/me.leolin/ShortcutBadger 1.1.22</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.tencent.mm.opensdk:wechat-sdk-android-without-mta</td>
+<td>$versions.wechat</td>
+<td>5.4.3</td>
+<td>5.5.4 5.5.7 5.5.3</td>
+<td> <a href="https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta">https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta 5.5.4</a> <br> <a href="https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta?repo=jcenter">https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta?repo=jcenter 5.5.7</a> <br> <a href="https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta?repo=mulesoft-public">https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta?repo=mulesoft-public 5.5.3</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.nineoldandroids:library</td>
+<td>$versions.nineoldandroids</td>
+<td>2.4.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.huawei.hms:push</td>
+<td>$versions.huawei</td>
+<td>5.0.0.300</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>nl.qbusict:cupboard</td>
+<td>$versions.qbusict</td>
+<td>2.2.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.facebook.soloader:soloader</td>
+<td>$versions.soloader</td>
+<td>0.5.0</td>
+<td>0.9.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.facebook.soloader/soloader">https://mvnrepository.com/artifact/com.facebook.soloader/soloader 0.9.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.google.android:flexbox</td>
+<td>$versions.flexbox</td>
+<td>1.0.0</td>
+<td>1.0.0 1.1.1 2.0.1</td>
+<td> <a href="https://mvnrepository.com/artifact/com.google.android/flexbox">https://mvnrepository.com/artifact/com.google.android/flexbox 1.0.0</a> <br> <a href="https://mvnrepository.com/artifact/com.google.android/flexbox?repo=jcenter">https://mvnrepository.com/artifact/com.google.android/flexbox?repo=jcenter 1.1.1</a> <br> <a href="https://mvnrepository.com/artifact/com.google.android/flexbox?repo=bt-google-flexbox-layout">https://mvnrepository.com/artifact/com.google.android/flexbox?repo=bt-google-flexbox-layout 2.0.1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.squareup.okhttp3:okhttp</td>
+<td>$versions.okhttp3</td>
+<td>3.12.4</td>
+<td>4.10.0-RC1</td>
+<td> <a href="https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp">https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp 4.10.0-RC1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.google.code.gson:gson</td>
+<td>$versions.gson</td>
+<td>2.7</td>
+<td>2.8.6 2.1.0.v201203072145 2.2.2-atlassian-1</td>
+<td> <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson">https://mvnrepository.com/artifact/com.google.code.gson/gson 2.8.6</a> <br> <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson?repo=wso2">https://mvnrepository.com/artifact/com.google.code.gson/gson?repo=wso2 2.1.0.v201203072145</a> <br> <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson?repo=atlassian-3rdparty">https://mvnrepository.com/artifact/com.google.code.gson/gson?repo=atlassian-3rdparty 2.2.2-atlassian-1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>androidx.constraintlayout:constraintlayout</td>
+<td>1.1.3</td>
+<td></td>
+<td>2.0.2</td>
+<td> <a href="https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout">https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout 2.0.2</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>top.zibin:Luban</td>
+<td>$versions.luban</td>
+<td>1.1.8</td>
+<td>1.1.6 1.1.8</td>
+<td> <a href="https://mvnrepository.com/artifact/top.zibin/Luban">https://mvnrepository.com/artifact/top.zibin/Luban 1.1.6</a> <br> <a href="https://mvnrepository.com/artifact/top.zibin/Luban?repo=jcenter">https://mvnrepository.com/artifact/top.zibin/Luban?repo=jcenter 1.1.8</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hpbr.bosszhipin:module-gallery</td>
+<td>$versions.gallery</td>
+<td>0.3.35</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hpbr.bosszhipin:module-kit</td>
+<td>$versions.kit</td>
+<td>4.2.8.3.5.4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hpbr.bosszhipin:module-kit-no-op</td>
+<td>$versions.kit_no_op</td>
+<td>4.2.8.3.5.4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hpbr.bosszhipin:module-apm</td>
+<td>$versions.apm</td>
+<td>0.9.9</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.alibaba.android:ddsharesdk</td>
+<td>$versions.dd</td>
+<td>1.1.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.airbnb.android:lottie</td>
+<td>$versions.lottie</td>
+<td>3.0.7</td>
+<td>3.4.4</td>
+<td> <a href="https://mvnrepository.com/artifact/com.airbnb.android/lottie">https://mvnrepository.com/artifact/com.airbnb.android/lottie 3.4.4</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.sankuai.waimai.router:router</td>
+<td>$versions.wmrouter</td>
+<td>1.2.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.sankuai.waimai.router:compiler</td>
+<td>$versions.wmrouter</td>
+<td>1.2.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.android.tools.build:gradle</td>
+<td>$versions.android_gradle_plugin</td>
+<td>3.5.0</td>
+<td>2.3.0 4.1.0</td>
+<td> <a href="https://mvnrepository.com/artifact/com.android.tools.build/gradle">https://mvnrepository.com/artifact/com.android.tools.build/gradle 2.3.0</a> <br> <a href="https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google">https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google 4.1.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.tencent.bugly:tinker-support</td>
+<td>$versions.tinker_gradle_plugin</td>
+<td>1.2.0</td>
+<td>1.2.0 1.2.1</td>
+<td> <a href="https://mvnrepository.com/artifact/com.tencent.bugly/tinker-support">https://mvnrepository.com/artifact/com.tencent.bugly/tinker-support 1.2.0</a> <br> <a href="https://mvnrepository.com/artifact/com.tencent.bugly/tinker-support?repo=jcenter">https://mvnrepository.com/artifact/com.tencent.bugly/tinker-support?repo=jcenter 1.2.1</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.sankuai.waimai.router:plugin</td>
+<td>$versions.wmrouter</td>
+<td>1.2.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.hpbr.bosszhipin:module-zpui</td>
+<td>$versions.zpui</td>
+<td>0.0.842</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.tencent.wcdb:room</td>
+<td>$versions.wcdb_room</td>
+<td>1.0.8</td>
+<td>1.1-19</td>
+<td> <a href="https://mvnrepository.com/artifact/com.tencent.wcdb/room">https://mvnrepository.com/artifact/com.tencent.wcdb/room 1.1-19</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.github.jiayuliang1314:StrongToolsRecyclerView</td>
+<td>2.9</td>
+<td></td>
+<td> 3.0</td>
+<td> <a href="https://jitpack.io/com/github/jiayuliang1314/StrongToolsRecyclerView">https://jitpack.io/com/github/jiayuliang1314/StrongToolsRecyclerView  3.0</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.aliyun.sdk.android:AliyunPlayer</td>
+<td>4.5.0-full</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.alivc.conan:AlivcConan</td>
+<td>0.9.5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>com.tencent.liteav:LiteAVSDK_Professional</td>
+<td>$versions.liteav</td>
+<td>7.2.8927</td>
+<td>7.2.8927 7.8.9518</td>
+<td> <a href="https://mvnrepository.com/artifact/com.tencent.liteav/LiteAVSDK_Professional">https://mvnrepository.com/artifact/com.tencent.liteav/LiteAVSDK_Professional 7.2.8927</a> <br> <a href="https://mvnrepository.com/artifact/com.tencent.liteav/LiteAVSDK_Professional?repo=jcenter">https://mvnrepository.com/artifact/com.tencent.liteav/LiteAVSDK_Professional?repo=jcenter 7.8.9518</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.tencent.imsdk:imsdk</td>
+<td>$versions.imsdk</td>
+<td>4.8.10</td>
+<td>4.7.10 5.0.9</td>
+<td> <a href="https://mvnrepository.com/artifact/com.tencent.imsdk/imsdk">https://mvnrepository.com/artifact/com.tencent.imsdk/imsdk 4.7.10</a> <br> <a href="https://mvnrepository.com/artifact/com.tencent.imsdk/imsdk?repo=jcenter">https://mvnrepository.com/artifact/com.tencent.imsdk/imsdk?repo=jcenter 5.0.9</a> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>com.facebook.shimmer:shimmer</td>
+<td>0.5.0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<br><br>ext.deps = [:]<br>def versions = [:]<br>versions.androidx = "1.1.0"  least ->  <a href="https://mvnrepository.com/artifact/androidx.annotation/annotation">1.1.0</a>  <a href="https://mvnrepository.com/artifact/androidx.core/core">1.3.2</a>  <a href="https://mvnrepository.com/artifact/androidx.appcompat/appcompat">1.2.0</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>versions.navigation = "2.1.0"  -->  <a href="https://mvnrepository.com/artifact/androidx.navigation/navigation-fragment">2.3.1</a>  <a href="https://mvnrepository.com/artifact/androidx.navigation/navigation-ui">2.3.1</a>  <br>versions.lifecycle = "2.1.0"  -->  <a href="https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions">2.2.0</a>  <a href="https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-livedata">2.2.0</a>  <br>versions.viewpager2 = "1.0.0"<br>versions.commonMarkVersion = "0.12.1"  -->  <a href="https://mvnrepository.com/artifact/com.atlassian.commonmark/commonmark">0.15.2</a>  <a href="https://mvnrepository.com/artifact/com.atlassian.commonmark/commonmark-ext-gfm-strikethrough">0.15.2</a>  <a href="https://mvnrepository.com/artifact/com.atlassian.commonmark/commonmark-ext-gfm-tables">0.15.2</a>  <br>versions.support = "28.0.0"<br>versions.multidex = "1.0.1"<br>versions.android_gradle_plugin = "3.5.0"  -->  <a href="https://mvnrepository.com/artifact/com.android.tools.build/gradle">2.3.0</a>  <a href="https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google">4.1.0</a>  <br>versions.tinker_gradle_plugin = "1.2.0"  -->  <a href="https://mvnrepository.com/artifact/com.tencent.bugly/tinker-support?repo=jcenter">1.2.1</a>  <br>versions.umeng = "6.1.2"  -->  <a href="https://mvnrepository.com/artifact/com.umeng.analytics/analytics">6.1.4</a>  <br>versions.stetho = "1.3.0"  -->  <a href="https://mvnrepository.com/artifact/com.facebook.stetho/stetho">1.5.1</a>  <br>versions.bugly_report = "1.4.2"  -->  <a href="https://mvnrepository.com/artifact/com.tencent.bugly/crashreport_upgrade">1.3.1</a>  <a href="https://mvnrepository.com/artifact/com.tencent.bugly/crashreport_upgrade?repo=jcenter">1.4.5</a>  <br>versions.bugly_tinker = "1.9.14.5"  -->  <a href="https://mvnrepository.com/artifact/com.tencent.tinker/tinker-android-lib">1.9.14.7</a>  <a href="https://mvnrepository.com/artifact/com.tencent.tinker/tinker-android-lib?repo=jcenter">1.9.14.8</a>  <br>versions.bugly_native = "3.6.0.1"  -->  <a href="https://mvnrepository.com/artifact/com.tencent.bugly/nativecrashreport?repo=pentaho-omni">3.7.471</a>  <a href="https://mvnrepository.com/artifact/com.tencent.bugly/nativecrashreport?repo=jcenter">3.7.47</a>  <br>versions.walle = "1.0.3"  -->  <a href="https://mvnrepository.com/artifact/com.meituan.android.walle/payload_reader">1.1.6</a>  <a href="https://mvnrepository.com/artifact/com.meituan.android.walle/payload_reader?repo=jcenter">1.1.7</a>  <br>versions.tlog = "1.1.5"<br>versions.ucrop = "2.2.1"  -->  <a href="https://mvnrepository.com/artifact/com.github.yalantis/ucrop?repo=mulesoft-public">2.2.5-native</a>  <br>versions.fastjson = "1.2.49"  -->  <a href="https://mvnrepository.com/artifact/com.alibaba/fastjson">1.2.74</a>  <br>versions.oss = "2.5.0"<br>versions.badger = "1.1.21@aar"  -->  <a href="https://mvnrepository.com/artifact/me.leolin/ShortcutBadger">1.1.22</a>  <br>versions.wechat = "5.4.3"  -->  <a href="https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta">5.5.4</a>  <a href="https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta?repo=jcenter">5.5.7</a>  <a href="https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta?repo=mulesoft-public">5.5.3</a>  <br>versions.piasy = "1.5.6"  least ->  <a href="https://mvnrepository.com/artifact/com.github.piasy/BigImageViewer">1.5.7</a>  <a href="https://mvnrepository.com/artifact/com.github.piasy/FrescoImageLoader">1.4.4</a>  <a href="https://mvnrepository.com/artifact/com.github.piasy/FrescoImageLoader?repo=jcenter">1.7.0</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>//versions.amap_map2d = "5.2.0"<br>versions.amap_map3d = "7.1.0"  -->  <a href="https://mvnrepository.com/artifact/com.amap.api/3dmap">7.6.0</a>  <br>versions.amap_search = "7.1.0"  -->  <a href="https://mvnrepository.com/artifact/com.amap.api/search">7.6.0</a>  <br>versions.amap_location = "4.7.2"  -->  <a href="https://mvnrepository.com/artifact/com.amap.api/location">5.2.0</a>  <br>versions.fresco = "1.10.0"  least ->  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/fresco">2.3.0</a>  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/fresco?repo=jcenter">2.2.0</a>  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/animated-gif">2.3.0</a>  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/imagepipeline-okhttp3">2.3.0</a>  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/imagepipeline-okhttp3?repo=jcenter">2.2.0</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>versions.nineoldandroids = "2.4.0"<br>versions.huawei = "5.0.0.300"<br>versions.qbusict = "2.2.0"<br>versions.soloader = "0.5.0"  -->  <a href="https://mvnrepository.com/artifact/com.facebook.soloader/soloader">0.9.0</a>  <br>versions.flexbox = "1.0.0"  -->  <a href="https://mvnrepository.com/artifact/com.google.android/flexbox?repo=jcenter">1.1.1</a>  <a href="https://mvnrepository.com/artifact/com.google.android/flexbox?repo=bt-google-flexbox-layout">2.0.1</a>  <br>versions.okhttp3 = "3.12.4"  -->  <a href="https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp">4.10.0-RC1</a>  <br>versions.gson = "2.7"  -->  <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson">2.8.6</a>  <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson?repo=wso2">2.1.0.v201203072145</a>  <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson?repo=atlassian-3rdparty">2.2.2-atlassian-1</a>  <br>versions.nimlib = "4.4.0"  -->  <a href="https://mvnrepository.com/artifact/com.netease.nimlib/basesdk">7.7.1</a>  <a href="https://mvnrepository.com/artifact/com.netease.nimlib/basesdk?repo=jcenter">8.0.0</a>  <a href="https://mvnrepository.com/artifact/com.netease.nimlib/nrtc">7.7.1</a>  <a href="https://mvnrepository.com/artifact/com.netease.nimlib/nrtc?repo=jcenter">8.0.0</a>  <a href="https://mvnrepository.com/artifact/com.netease.nimlib/avchat">7.7.1</a>  <a href="https://mvnrepository.com/artifact/com.netease.nimlib/avchat?repo=jcenter">8.0.0</a>  <br>versions.constraint_layout = "1.1.0"<br>versions.luban = "1.1.8"  -->  <a href="https://mvnrepository.com/artifact/top.zibin/Luban">1.1.6</a>  <br>versions.zxing = "3.3.0"  -->  <a href="https://mvnrepository.com/artifact/com.google.zxing/core">3.4.1</a>  <br>versions.espresso = "2.2.2"<br>versions.kit = "4.2.8.3.5.4"<br>versions.kit_no_op = "4.2.8.3.5.4"<br>versions.dd = "1.1.0"<br>versions.lottie = "3.0.7"  -->  <a href="https://mvnrepository.com/artifact/com.airbnb.android/lottie">3.4.4</a>  <br>versions.apm = "0.9.9"<br>versions.matrix = "0.9.3"<br>versions.gallery = "0.3.35"<br>versions.wmrouter = "1.2.0"<br>versions.zpui = "0.0.842"<br>versions.kotlin = '1.3.10'  least ->  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin">1.4.10</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=gradle-plugins"></a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-dev">1.4.10-release-417</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-eap">1.3.0-rc-131</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-plugin">1.4.0-rc-release-221</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin">0.5.748</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-bootstrap">1.4.0-rc-87</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8">1.4.10</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-eap">1.3.0-rc-131</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-bootstrap">1.4.0-rc-87</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-plugin">1.4.0-rc-release-221</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-dev">1.4.10-release-417</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>versions.kotlin_coroutines = "1.1.1"  -->  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core">1.3.9</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core?repo=jcenter">1.3.8-1.4.0-rc-218</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core?repo=kotlinx">1.3.8-1.4-rc-154</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android">1.3.9</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android?repo=jcenter">1.3.8-1.4.0-rc-218</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android?repo=kotlinx">1.3.8-1.4-rc-154</a>  <br>versions.aspectjx = "2.0.0"  -->  <a href="https://mvnrepository.com/artifact/com.hujiang.aspectjx/gradle-android-plugin-aspectjx">2.0.10</a>  <a href="https://mvnrepository.com/artifact/com.hujiang.aspectjx/gradle-android-plugin-aspectjx?repo=jcenter">2.0.8</a>  <br>versions.aspectjrt = "1.9.4"  -->  <a href="https://mvnrepository.com/artifact/org.aspectj/aspectjrt">1.9.6</a>  <a href="https://mvnrepository.com/artifact/org.aspectj/aspectjrt?repo=alfresco-public">1.9.2.RC3</a>  <br>versions.aspectjtools = "1.8.13"  -->  <a href="https://mvnrepository.com/artifact/org.aspectj/aspectjtools">1.9.6</a>  <a href="https://mvnrepository.com/artifact/org.aspectj/aspectjtools?repo=alfresco-public">1.9.2.RC3</a>  <br>versions.room = "1.1.1"<br>versions.wcdb_room = "1.0.8"  -->  <a href="https://mvnrepository.com/artifact/com.tencent.wcdb/room">1.1-19</a>  <br>versions.liteav = "7.2.8927"  -->  <a href="https://mvnrepository.com/artifact/com.tencent.liteav/LiteAVSDK_Professional?repo=jcenter">7.8.9518</a>  <br>versions.imsdk = "4.8.10"  -->  <a href="https://mvnrepository.com/artifact/com.tencent.imsdk/imsdk">4.7.10</a>  <a href="https://mvnrepository.com/artifact/com.tencent.imsdk/imsdk?repo=jcenter">5.0.9</a>  <br>def deps = [:]<br><br>def zhipin = [:]<br>zhipin.fresco_image_loader = "com.twl.zhipin:fresco-image-loader:0.0.2"<br>zhipin.mqtt_service = "com.twl.zhipin:mqtt-service:0.0.8_exclude_legacy"<br>zhipin.magicindicator = "com.twl.zhipin:magicindicator:0.0.2"<br>zhipin.file_selecter = "com.twl.zhipin:file-selecter:0.0.2"<br>deps.zhipin = zhipin<br><br>def commonmark = [:]<br>commonmark.commonmark = "com.atlassian.commonmark:commonmark:$versions.commonMarkVersion"<br>commonmark.commonmark_strikethrough = "com.atlassian.commonmark:commonmark-ext-gfm-strikethrough:$versions.commonMarkVersion"<br>commonmark.commonmark_table = "com.atlassian.commonmark:commonmark-ext-gfm-tables:$versions.commonMarkVersion"<br>deps.commonmark = commonmark<br><br>def androidx = [:]<br>androidx.recyclerview = "androidx.recyclerview:recyclerview:1.0.0"  -->  <a href="https://mvnrepository.com/artifact/androidx.recyclerview/recyclerview">1.1.0</a>  <br>androidx.annotation = "androidx.annotation:annotation:$versions.androidx"  before -> 1.1.0   least ->  <a href="https://mvnrepository.com/artifact/androidx.annotation/annotation">1.1.0</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>androidx.core = "androidx.core:core:$versions.androidx"  before -> 1.1.0   least ->  <a href="https://mvnrepository.com/artifact/androidx.core/core">1.3.2</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>androidx.navigation_fragment = "androidx.navigation:navigation-fragment:$versions.navigation"<br>androidx.navigation_ui = "androidx.navigation:navigation-ui:$versions.navigation"<br>deps.androidx = androidx<br>deps.viewpager2 = "androidx.viewpager2:viewpager2:$versions.viewpager2"<br><br>def lifecycle = [:]<br>lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"<br>lifecycle.livedata = "androidx.lifecycle:lifecycle-livedata:$versions.lifecycle"<br>deps.lifecycle = lifecycle<br><br><br>def support = [:]<br>support.annotations = "androidx.annotation:annotation:$versions.androidx" <font color="red"> -> duplicate library,can delete!!! </font><br>support.app_compat = "androidx.appcompat:appcompat:$versions.androidx"  before -> 1.1.0   least ->  <a href="https://mvnrepository.com/artifact/androidx.appcompat/appcompat">1.2.0</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>support.cardview = "androidx.cardview:cardview:1.0.0"<br>support.design = "com.google.android.material:material:1.0.0"  -->  <a href="https://mvnrepository.com/artifact/com.google.android.material/material">1.2.1</a>  <br>deps.support = support<br><br>def espresso = [:]<br>espresso.core = 'androidx.test.espresso:espresso-core:3.1.0'  -->  <a href="https://mvnrepository.com/artifact/androidx.test.espresso/espresso-core">3.3.0</a>  <br>deps.espresso = espresso<br><br>def atsl = [:]<br>atsl.runner = "androidx.test:runner:$versions.atsl_runner"<br>atsl.rules = "androidx.test:rules:$versions.atsl_runner"<br>deps.atsl = atsl<br><br>def bugly = [:]<br>bugly.report = "com.tencent.bugly:crashreport_upgrade:$versions.bugly_report"<br>bugly.bugly_native = "com.tencent.bugly:nativecrashreport:$versions.bugly_native"<br>bugly.bugly_tinker = "com.tencent.tinker:tinker-android-lib:$versions.bugly_tinker"<br>deps.bugly = bugly<br><br>def piasy = [:]<br>piasy.viewer = "com.github.piasy:BigImageViewer:$versions.piasy"  before -> 1.5.6   least ->  <a href="https://mvnrepository.com/artifact/com.github.piasy/BigImageViewer">1.5.7</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>piasy.loader = "com.github.piasy:FrescoImageLoader:$versions.piasy"  before -> 1.5.6   least ->  <a href="https://mvnrepository.com/artifact/com.github.piasy/FrescoImageLoader">1.4.4</a>  <a href="https://mvnrepository.com/artifact/com.github.piasy/FrescoImageLoader?repo=jcenter">1.7.0</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>piasy.indicator = "com.github.piasy:ProgressPieIndicator:$versions.piasy"  before -> 1.5.6  <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>deps.piasy = piasy<br><br>def amap = [:]<br>//amap.map2d = "com.amap.api:map2d:$versions.amap_map2d"<br>amap.map3d = "com.amap.api:3dmap:$versions.amap_map3d"<br>amap.search = "com.amap.api:search:$versions.amap_search"<br>amap.location = "com.amap.api:location:$versions.amap_location"<br>deps.amap = amap<br><br><br>def fresco = [:]<br>fresco.fresco = "com.facebook.fresco:fresco:$versions.fresco"  before -> 1.10.0   least ->  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/fresco">2.3.0</a>  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/fresco?repo=jcenter">2.2.0</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>fresco.animated_gif = "com.facebook.fresco:animated-gif:$versions.fresco"  before -> 1.10.0   least ->  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/animated-gif">2.3.0</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>fresco.okhttp = "com.facebook.fresco:imagepipeline-okhttp3:$versions.fresco"  before -> 1.10.0   least ->  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/imagepipeline-okhttp3">2.3.0</a>  <a href="https://mvnrepository.com/artifact/com.facebook.fresco/imagepipeline-okhttp3?repo=jcenter">2.2.0</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>deps.fresco = fresco<br><br>def nimlib = [:]<br>nimlib.basesdk = "com.netease.nimlib:basesdk:$versions.nimlib"<br>nimlib.nrtc = "com.netease.nimlib:nrtc:$versions.nimlib"<br>nimlib.avchat = "com.netease.nimlib:avchat:$versions.nimlib"<br>deps.nimlib = nimlib<br><br>def kotlin = [:]<br>kotlin.kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"  before -> 1.3.10   least ->  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin">1.4.10</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=gradle-plugins"></a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-dev">1.4.10-release-417</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-eap">1.3.0-rc-131</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-plugin">1.4.0-rc-release-221</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin">0.5.748</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin?repo=kotlin-bootstrap">1.4.0-rc-87</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>kotlin.kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"  before -> 1.3.10   least ->  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8">1.4.10</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-eap">1.3.0-rc-131</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-bootstrap">1.4.0-rc-87</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-plugin">1.4.0-rc-release-221</a>  <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8?repo=kotlin-dev">1.4.10-release-417</a>   <font color="green">Many Lib Use Same $Version, But They Are Not Same</font><br>kotlin.coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlin_coroutines"<br>kotlin.coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlin_coroutines"<br>kotlin.aspectjx = "com.hujiang.aspectjx:gradle-android-plugin-aspectjx:$versions.aspectjx"<br>kotlin.aspectjrt = "org.aspectj:aspectjrt:$versions.aspectjrt"<br>kotlin.aspectjtools = "org.aspectj:aspectjtools:$versions.aspectjtools"<br>deps.kotlin = kotlin<br><br>def room = [:]<br>room.compiler = 'androidx.room:room-compiler:2.1.0'  -->  <a href="https://mvnrepository.com/artifact/androidx.room/room-compiler">2.2.5</a>  <br>room.runtime = 'androidx.room:room-runtime:2.1.0'  -->  <a href="https://mvnrepository.com/artifact/androidx.room/room-runtime">2.2.5</a>  <br>deps.room = room<br><br>def matrix = [:]<br>matrix.trace_canary = "com.hpbr.bosszhipin:matrix-trace-canary:$versions.matrix"<br>matrix.trace_canary_no_op = "com.hpbr.bosszhipin:matrix-trace-canary-no-op:$versions.matrix"<br>matrix.resource_canary_android = "com.hpbr.bosszhipin:matrix-resource-canary-android:$versions.matrix"<br>matrix.resource_canary_android_no_op = "com.hpbr.bosszhipin:matrix-resource-canary-android-no-op:$versions.matrix"<br>deps.matrix = matrix<br><br>deps.multidex = 'androidx.multidex:multidex:2.0.0'  -->  <a href="https://mvnrepository.com/artifact/androidx.multidex/multidex">2.0.1</a>  <br>deps.umeng = "com.umeng.analytics:analytics:$versions.umeng"<br>deps.zxing = "com.google.zxing:core:$versions.zxing"<br>deps.stetho = "com.facebook.stetho:stetho:$versions.stetho"<br>deps.walle = "com.meituan.android.walle:payload_reader:$versions.walle"<br>deps.tlog = "com.techwolf.lib:tlog:$versions.tlog"<br>deps.ucrop = "com.github.yalantis:ucrop:$versions.ucrop"<br>deps.fastjson = "com.alibaba:fastjson:$versions.fastjson"<br>deps.badger = "me.leolin:ShortcutBadger:$versions.badger"<br>deps.wechat = "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:$versions.wechat"<br>deps.nineoldandroids = "com.nineoldandroids:library:$versions.nineoldandroids"<br>deps.huawei = "com.huawei.hms:push:$versions.huawei"<br>deps.qbusict = "nl.qbusict:cupboard:$versions.qbusict"<br>deps.soloader = "com.facebook.soloader:soloader:$versions.soloader"<br>deps.flexbox = "com.google.android:flexbox:$versions.flexbox"<br>deps.okhttp3 = "com.squareup.okhttp3:okhttp:$versions.okhttp3"<br><br>deps.gson = "com.google.code.gson:gson:$versions.gson"<br>deps.constraint_layout = 'androidx.constraintlayout:constraintlayout:1.1.3'  -->  <a href="https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout">2.0.2</a>  <br>deps.luban = "top.zibin:Luban:$versions.luban"<br>deps.gallery = "com.hpbr.bosszhipin:module-gallery:$versions.gallery"<br>deps.kit = "com.hpbr.bosszhipin:module-kit:$versions.kit"<br>deps.kit_no_op = "com.hpbr.bosszhipin:module-kit-no-op:$versions.kit_no_op"<br>deps.apm = "com.hpbr.bosszhipin:module-apm:$versions.apm"<br>deps.dd = "com.alibaba.android:ddsharesdk:$versions.dd"<br>deps.lottie = "com.airbnb.android:lottie:$versions.lottie"<br>deps.wmrouter = "com.sankuai.waimai.router:router:$versions.wmrouter"<br>deps.wmrouter_compiler = "com.sankuai.waimai.router:compiler:$versions.wmrouter"<br><br>deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"<br>deps.tinker_gradle_plugin = "com.tencent.bugly:tinker-support:$versions.tinker_gradle_plugin"<br>deps.wmrouter_gradle_plugin = "com.sankuai.waimai.router:plugin:$versions.wmrouter"<br>deps.zpui = "com.hpbr.bosszhipin:module-zpui:$versions.zpui"<br>deps.wcdb_room = "com.tencent.wcdb:room:$versions.wcdb_room"<br>deps.baseRecyclerView = "com.github.jiayuliang1314:StrongToolsRecyclerView:2.9"  -->  <a href="https://jitpack.io/com/github/jiayuliang1314/StrongToolsRecyclerView"> 3.0</a>  <br><br>deps.aliplayer = "com.aliyun.sdk.android:AliyunPlayer:4.5.0-full"<br>deps.AlivcConan = "com.alivc.conan:AlivcConan:0.9.5"<br><br>deps.liteav = "com.tencent.liteav:LiteAVSDK_Professional:$versions.liteav"<br>deps.imsdk = "com.tencent.imsdk:imsdk:$versions.imsdk"<br><br>deps.shimmer = 'com.facebook.shimmer:shimmer:0.5.0'<br><br>ext.deps = deps<br><br><br>def build_versions = [:]<br>build_versions.min_sdk = 17<br>build_versions.target_sdk = 26<br>build_versions.compile_sdk = 28<br>build_versions.build_tools = "28.0.3"<br>ext.build_versions = build_versions<br><br>static def addPluginRepos(RepositoryHandler handler) {<br>    handler.maven { url "https://android2.weizhipin.com/nexus/repository/public/" }<br>//    handler.maven {<br>//        url "https://maven.aliyun.com/repository/jcenter"<br>//    }<br>//    handler.maven {<br>//        url "https://maven.aliyun.com/repository/google"<br>//    }<br>//    handler.maven {<br>//        url "https://developer.huawei.com/repo/"<br>//    }<br>//    handler.maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }<br>////    handler.maven { url "https://android2.weizhipin.com/nexus/repository/releases/" }<br>//    handler.google()<br>}<br><br>def addRepos(RepositoryHandler handler) {<br>    handler.flatDir { dirs "$projectDir/libs" }<br>    handler.maven{ url uri("$rootProject.rootDir/.local")}<br>    handler.maven { url "https://android2.weizhipin.com/nexus/repository/public/" }<br>//    handler.maven { url "https://android2.weizhipin.com/nexus/repository/releases/" }<br>//    handler.maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }<br>//    handler.maven { url 'https://maven.aliyun.com/repository/central' }<br>//    handler.maven { url 'https://maven.aliyun.com/repository/google' }<br>//    handler.maven { url 'https://maven.aliyun.com/repository/jcenter' }<br>    // Techwolf Maven服务器URL<br><br>//    handler.maven { url "http://dl.bintray.com/piasy/maven" }<br>//    handler.maven { url 'https://jitpack.io' }<br>//    handler.maven { url 'http://developer.huawei.com/repo/' }<br><br>//    handler.jcenter()<br>//    handler.mavenCentral()<br>//    handler.google()<br>}<br><br>ext.addRepos = this.&addRepos<br>ext.addPluginRepos = this.&addPluginRepos<br><br><br>ext.deps = [:]<br>def versions = [:]<br>versions.zhipin_fresco_image_loader = 0.0.2<br>versions.zhipin_mqtt_service = 0.0.8_exclude_legacy<br>versions.zhipin_magicindicator = 0.0.2<br>versions.zhipin_file_selecter = 0.0.2<br>versions.androidx_recyclerview = 1.0.0<br>versions.support_cardview = 1.0.0<br>versions.support_design = 1.0.0<br>versions.espresso_core = 3.1.0<br>versions.room_compiler = 2.1.0<br>versions.room_runtime = 2.1.0<br>versions.deps_multidex = 2.0.0<br>versions.deps_constraint_layout = 1.1.3<br>versions.deps_baseRecyclerView = 2.9<br>versions.deps_aliplayer = 4.5.0-full<br>versions.deps_AlivcConan = 0.9.5<br>versions.deps_shimmer = 0.5.0<br>versions.androidx = "1.1.0"<br>versions.navigation = "2.1.0"<br>versions.lifecycle = "2.1.0"<br>versions.viewpager2 = "1.0.0"<br>versions.commonMarkVersion = "0.12.1"<br>versions.support = "28.0.0"<br>versions.multidex = "1.0.1"<br>versions.android_gradle_plugin = "3.5.0"<br>versions.tinker_gradle_plugin = "1.2.0"<br>versions.umeng = "6.1.2"<br>versions.stetho = "1.3.0"<br>versions.bugly_report = "1.4.2"<br>versions.bugly_tinker = "1.9.14.5"<br>versions.bugly_native = "3.6.0.1"<br>versions.walle = "1.0.3"<br>versions.tlog = "1.1.5"<br>versions.ucrop = "2.2.1"<br>versions.fastjson = "1.2.49"<br>versions.oss = "2.5.0"<br>versions.badger = "1.1.21@aar"<br>versions.wechat = "5.4.3"<br>versions.piasy = "1.5.6"<br>//versions.amap_map2d = "5.2.0"<br>versions.amap_map3d = "7.1.0"<br>versions.amap_search = "7.1.0"<br>versions.amap_location = "4.7.2"<br>versions.fresco = "1.10.0"<br>versions.nineoldandroids = "2.4.0"<br>versions.huawei = "5.0.0.300"<br>versions.qbusict = "2.2.0"<br>versions.soloader = "0.5.0"<br>versions.flexbox = "1.0.0"<br>versions.okhttp3 = "3.12.4"<br>versions.gson = "2.7"<br>versions.nimlib = "4.4.0"<br>versions.constraint_layout = "1.1.0"<br>versions.luban = "1.1.8"<br>versions.zxing = "3.3.0"<br>versions.espresso = "2.2.2"<br>versions.kit = "4.2.8.3.5.4"<br>versions.kit_no_op = "4.2.8.3.5.4"<br>versions.dd = "1.1.0"<br>versions.lottie = "3.0.7"<br>versions.apm = "0.9.9"<br>versions.matrix = "0.9.3"<br>versions.gallery = "0.3.35"<br>versions.wmrouter = "1.2.0"<br>versions.zpui = "0.0.842"<br>versions.kotlin = '1.3.10'<br>versions.kotlin_coroutines = "1.1.1"<br>versions.aspectjx = "2.0.0"<br>versions.aspectjrt = "1.9.4"<br>versions.aspectjtools = "1.8.13"<br>versions.room = "1.1.1"<br>versions.wcdb_room = "1.0.8"<br>versions.liteav = "7.2.8927"<br>versions.imsdk = "4.8.10"<br>def deps = [:]<br><br>def zhipin = [:]<br>zhipin.fresco_image_loader = "com.twl.zhipin:fresco-image-loader:$versions.zhipin_fresco_image_loader"<br>zhipin.mqtt_service = "com.twl.zhipin:mqtt-service:$versions.zhipin_mqtt_service"<br>zhipin.magicindicator = "com.twl.zhipin:magicindicator:$versions.zhipin_magicindicator"<br>zhipin.file_selecter = "com.twl.zhipin:file-selecter:$versions.zhipin_file_selecter"<br>deps.zhipin = zhipin<br><br>def commonmark = [:]<br>commonmark.commonmark = "com.atlassian.commonmark:commonmark:$versions.commonMarkVersion"<br>commonmark.commonmark_strikethrough = "com.atlassian.commonmark:commonmark-ext-gfm-strikethrough:$versions.commonMarkVersion"<br>commonmark.commonmark_table = "com.atlassian.commonmark:commonmark-ext-gfm-tables:$versions.commonMarkVersion"<br>deps.commonmark = commonmark<br><br>def androidx = [:]<br>androidx.recyclerview = "androidx.recyclerview:recyclerview:$versions.androidx_recyclerview"<br>androidx.annotation = "androidx.annotation:annotation:$versions.androidx"<br>androidx.core = "androidx.core:core:$versions.androidx"<br>androidx.navigation_fragment = "androidx.navigation:navigation-fragment:$versions.navigation"<br>androidx.navigation_ui = "androidx.navigation:navigation-ui:$versions.navigation"<br>deps.androidx = androidx<br>deps.viewpager2 = "androidx.viewpager2:viewpager2:$versions.viewpager2"<br><br>def lifecycle = [:]<br>lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"<br>lifecycle.livedata = "androidx.lifecycle:lifecycle-livedata:$versions.lifecycle"<br>deps.lifecycle = lifecycle<br><br><br>def support = [:]<br>support.annotations = "androidx.annotation:annotation:$versions.androidx"<br>support.app_compat = "androidx.appcompat:appcompat:$versions.androidx"<br>support.cardview = "androidx.cardview:cardview:$versions.support_cardview"<br>support.design = "com.google.android.material:material:$versions.support_design"<br>deps.support = support<br><br>def espresso = [:]<br>espresso.core = 'androidx.test.espresso:espresso-core:$versions.espresso_core'<br>deps.espresso = espresso<br><br>def atsl = [:]<br>atsl.runner = "androidx.test:runner:$versions.atsl_runner"<br>atsl.rules = "androidx.test:rules:$versions.atsl_runner"<br>deps.atsl = atsl<br><br>def bugly = [:]<br>bugly.report = "com.tencent.bugly:crashreport_upgrade:$versions.bugly_report"<br>bugly.bugly_native = "com.tencent.bugly:nativecrashreport:$versions.bugly_native"<br>bugly.bugly_tinker = "com.tencent.tinker:tinker-android-lib:$versions.bugly_tinker"<br>deps.bugly = bugly<br><br>def piasy = [:]<br>piasy.viewer = "com.github.piasy:BigImageViewer:$versions.piasy"<br>piasy.loader = "com.github.piasy:FrescoImageLoader:$versions.piasy"<br>piasy.indicator = "com.github.piasy:ProgressPieIndicator:$versions.piasy"<br>deps.piasy = piasy<br><br>def amap = [:]<br>//amap.map2d = "com.amap.api:map2d:$versions.amap_map2d"<br>amap.map3d = "com.amap.api:3dmap:$versions.amap_map3d"<br>amap.search = "com.amap.api:search:$versions.amap_search"<br>amap.location = "com.amap.api:location:$versions.amap_location"<br>deps.amap = amap<br><br><br>def fresco = [:]<br>fresco.fresco = "com.facebook.fresco:fresco:$versions.fresco"<br>fresco.animated_gif = "com.facebook.fresco:animated-gif:$versions.fresco"<br>fresco.okhttp = "com.facebook.fresco:imagepipeline-okhttp3:$versions.fresco"<br>deps.fresco = fresco<br><br>def nimlib = [:]<br>nimlib.basesdk = "com.netease.nimlib:basesdk:$versions.nimlib"<br>nimlib.nrtc = "com.netease.nimlib:nrtc:$versions.nimlib"<br>nimlib.avchat = "com.netease.nimlib:avchat:$versions.nimlib"<br>deps.nimlib = nimlib<br><br>def kotlin = [:]<br>kotlin.kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"<br>kotlin.kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"<br>kotlin.coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlin_coroutines"<br>kotlin.coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlin_coroutines"<br>kotlin.aspectjx = "com.hujiang.aspectjx:gradle-android-plugin-aspectjx:$versions.aspectjx"<br>kotlin.aspectjrt = "org.aspectj:aspectjrt:$versions.aspectjrt"<br>kotlin.aspectjtools = "org.aspectj:aspectjtools:$versions.aspectjtools"<br>deps.kotlin = kotlin<br><br>def room = [:]<br>room.compiler = 'androidx.room:room-compiler:$versions.room_compiler'<br>room.runtime = 'androidx.room:room-runtime:$versions.room_runtime'<br>deps.room = room<br><br>def matrix = [:]<br>matrix.trace_canary = "com.hpbr.bosszhipin:matrix-trace-canary:$versions.matrix"<br>matrix.trace_canary_no_op = "com.hpbr.bosszhipin:matrix-trace-canary-no-op:$versions.matrix"<br>matrix.resource_canary_android = "com.hpbr.bosszhipin:matrix-resource-canary-android:$versions.matrix"<br>matrix.resource_canary_android_no_op = "com.hpbr.bosszhipin:matrix-resource-canary-android-no-op:$versions.matrix"<br>deps.matrix = matrix<br><br>deps.multidex = 'androidx.multidex:multidex:$versions.deps_multidex'<br>deps.umeng = "com.umeng.analytics:analytics:$versions.umeng"<br>deps.zxing = "com.google.zxing:core:$versions.zxing"<br>deps.stetho = "com.facebook.stetho:stetho:$versions.stetho"<br>deps.walle = "com.meituan.android.walle:payload_reader:$versions.walle"<br>deps.tlog = "com.techwolf.lib:tlog:$versions.tlog"<br>deps.ucrop = "com.github.yalantis:ucrop:$versions.ucrop"<br>deps.fastjson = "com.alibaba:fastjson:$versions.fastjson"<br>deps.badger = "me.leolin:ShortcutBadger:$versions.badger"<br>deps.wechat = "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:$versions.wechat"<br>deps.nineoldandroids = "com.nineoldandroids:library:$versions.nineoldandroids"<br>deps.huawei = "com.huawei.hms:push:$versions.huawei"<br>deps.qbusict = "nl.qbusict:cupboard:$versions.qbusict"<br>deps.soloader = "com.facebook.soloader:soloader:$versions.soloader"<br>deps.flexbox = "com.google.android:flexbox:$versions.flexbox"<br>deps.okhttp3 = "com.squareup.okhttp3:okhttp:$versions.okhttp3"<br><br>deps.gson = "com.google.code.gson:gson:$versions.gson"<br>deps.constraint_layout = 'androidx.constraintlayout:constraintlayout:$versions.deps_constraint_layout'<br>deps.luban = "top.zibin:Luban:$versions.luban"<br>deps.gallery = "com.hpbr.bosszhipin:module-gallery:$versions.gallery"<br>deps.kit = "com.hpbr.bosszhipin:module-kit:$versions.kit"<br>deps.kit_no_op = "com.hpbr.bosszhipin:module-kit-no-op:$versions.kit_no_op"<br>deps.apm = "com.hpbr.bosszhipin:module-apm:$versions.apm"<br>deps.dd = "com.alibaba.android:ddsharesdk:$versions.dd"<br>deps.lottie = "com.airbnb.android:lottie:$versions.lottie"<br>deps.wmrouter = "com.sankuai.waimai.router:router:$versions.wmrouter"<br>deps.wmrouter_compiler = "com.sankuai.waimai.router:compiler:$versions.wmrouter"<br><br>deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"<br>deps.tinker_gradle_plugin = "com.tencent.bugly:tinker-support:$versions.tinker_gradle_plugin"<br>deps.wmrouter_gradle_plugin = "com.sankuai.waimai.router:plugin:$versions.wmrouter"<br>deps.zpui = "com.hpbr.bosszhipin:module-zpui:$versions.zpui"<br>deps.wcdb_room = "com.tencent.wcdb:room:$versions.wcdb_room"<br>deps.baseRecyclerView = "com.github.jiayuliang1314:StrongToolsRecyclerView:$versions.deps_baseRecyclerView"<br><br>deps.aliplayer = "com.aliyun.sdk.android:AliyunPlayer:$versions.deps_aliplayer"<br>deps.AlivcConan = "com.alivc.conan:AlivcConan:$versions.deps_AlivcConan"<br><br>deps.liteav = "com.tencent.liteav:LiteAVSDK_Professional:$versions.liteav"<br>deps.imsdk = "com.tencent.imsdk:imsdk:$versions.imsdk"<br><br>deps.shimmer = 'com.facebook.shimmer:shimmer:$versions.deps_shimmer'<br><br>ext.deps = deps<br><br><br>def build_versions = [:]<br>build_versions.min_sdk = 17<br>build_versions.target_sdk = 26<br>build_versions.compile_sdk = 28<br>build_versions.build_tools = "28.0.3"<br>ext.build_versions = build_versions<br><br>static def addPluginRepos(RepositoryHandler handler) {<br>    handler.maven { url "https://android2.weizhipin.com/nexus/repository/public/" }<br>//    handler.maven {<br>//        url "https://maven.aliyun.com/repository/jcenter"<br>//    }<br>//    handler.maven {<br>//        url "https://maven.aliyun.com/repository/google"<br>//    }<br>//    handler.maven {<br>//        url "https://developer.huawei.com/repo/"<br>//    }<br>//    handler.maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }<br>////    handler.maven { url "https://android2.weizhipin.com/nexus/repository/releases/" }<br>//    handler.google()<br>}<br><br>def addRepos(RepositoryHandler handler) {<br>    handler.flatDir { dirs "$projectDir/libs" }<br>    handler.maven{ url uri("$rootProject.rootDir/.local")}<br>    handler.maven { url "https://android2.weizhipin.com/nexus/repository/public/" }<br>//    handler.maven { url "https://android2.weizhipin.com/nexus/repository/releases/" }<br>//    handler.maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }<br>//    handler.maven { url 'https://maven.aliyun.com/repository/central' }<br>//    handler.maven { url 'https://maven.aliyun.com/repository/google' }<br>//    handler.maven { url 'https://maven.aliyun.com/repository/jcenter' }<br>    // Techwolf Maven服务器URL<br><br>//    handler.maven { url "http://dl.bintray.com/piasy/maven" }<br>//    handler.maven { url 'https://jitpack.io' }<br>//    handler.maven { url 'http://developer.huawei.com/repo/' }<br><br>//    handler.jcenter()<br>//    handler.mavenCentral()<br>//    handler.google()<br>}<br><br>ext.addRepos = this.&addRepos<br>ext.addPluginRepos = this.&addPluginRepos<br><body>
+</html>

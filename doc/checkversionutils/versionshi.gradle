@@ -1,0 +1,205 @@
+ext.deps = [:]
+def versions = [:]
+versions.androidx = "1.1.0"
+versions.viewpager2 = "1.0.0"
+versions.multidex = "2.0.1"
+versions.android_gradle_plugin = "3.5.0"
+versions.tinker_gradle_plugin = "1.2.0"
+versions.umeng = "6.1.2"
+versions.bugly_report = "1.4.2"
+versions.bugly_native = "3.7.1"
+versions.bugly_tinker = "1.9.14.3"
+versions.tlog = "1.1.3"
+versions.wechat = "5.1.4"
+versions.piasy = "1.5.1"
+versions.amap_map2d = "5.2.0"
+versions.amap_search = "5.7.0"
+versions.amap_location = "3.8.0"
+versions.fresco = "1.10.0"
+versions.huawei = "2.6.3.306"
+versions.qbusict = "2.2.0"
+versions.soloader = "0.5.1"
+versions.okhttp3 = "4.2.1"
+versions.gson = "2.7"
+versions.nimlib = "4.4.0"
+versions.constraint_layout = "1.1.3"
+versions.zxing = "3.3.0"
+versions.espresso = "2.2.2"
+versions.dcendents = "2.1"
+versions.jfrog = "1.8.4"
+versions.google_protobuf = "0.8.2"
+versions.wcdb_room = "1.0.8"
+versions.wcdb_android = "1.0.0"
+versions.gallery = "0.3.35"
+versions.lottie = "3.0.7"
+versions.protobuf = "3.6.1"
+versions.smartrefresh = "1.1.0"
+versions.room = "2.2.1"
+versions.stetho = "1.5.1"
+versions.protobuf_format = "1.4"
+versions.shortcutbadger = "1.1.22@aar"
+versions.doraemonkit = "1.1.8"
+versions.booster_version = "0.4.4"
+versions.startup = "0.0.3"
+versions.paging = "2.1.0"
+versions.magic_indicator = "1.6.0"
+versions.apm = "0.8.9"
+versions.commonMarkVersion = "0.13.0"
+
+def deps = [:]
+
+def androidx = [:]
+androidx.annotations = "androidx.annotation:annotation:$versions.androidx"
+androidx.app_compat = "androidx.appcompat:appcompat:$versions.androidx"
+androidx.recyclerview = "androidx.recyclerview:recyclerview:$versions.androidx"
+androidx.cardview = 'androidx.cardview:cardview:1.0.0'
+androidx.design = 'com.google.android.material:material:1.0.0'
+androidx.core = "androidx.core:core:$versions.androidx"
+deps.androidx = androidx
+deps.viewpager2 = "androidx.viewpager2:viewpager2:$versions.viewpager2"
+
+def espresso = [:]
+espresso.core = 'androidx.test.espresso:espresso-core:3.1.0'
+espresso.contrib = 'androidx.test.espresso:espresso-contrib:3.1.0'
+deps.espresso = espresso
+
+def atsl = [:]
+atsl.runner = "androidx.test:runner:$versions.atsl_runner"
+atsl.rules = "androidx.test:rules:$versions.atsl_runner"
+deps.atsl = atsl
+
+def bugly = [:]
+bugly.report = "com.tencent.bugly:crashreport_upgrade:$versions.bugly_report"
+bugly.bugly_native = "com.tencent.bugly:nativecrashreport:$versions.bugly_native"
+bugly.bugly_tinker = "com.tencent.tinker:tinker-android-lib:$versions.bugly_tinker"
+deps.bugly = bugly
+
+def piasy = [:]
+piasy.viewer = "com.github.piasy:BigImageViewer:$versions.piasy"
+piasy.loader = "com.github.piasy:FrescoImageLoader:$versions.piasy"
+deps.piasy = piasy
+
+def amap = [:]
+amap.map2d = "com.amap.api:map2d:$versions.amap_map2d"
+amap.search = "com.amap.api:search:$versions.amap_search"
+amap.location = "com.amap.api:location:$versions.amap_location"
+deps.amap = amap
+
+
+def fresco = [:]
+fresco.fresco = "com.facebook.fresco:fresco:$versions.fresco"
+fresco.animated_gif = "com.facebook.fresco:animated-gif:$versions.fresco"
+fresco.okhttp = "com.facebook.fresco:imagepipeline-okhttp3:$versions.fresco"
+fresco.imagepipeline = "com.facebook.fresco:imagepipeline:$versions.fresco"
+deps.fresco = fresco
+
+def nimlib = [:]
+nimlib.basesdk = "com.netease.nimlib:basesdk:$versions.nimlib"
+nimlib.nrtc = "com.netease.nimlib:nrtc:$versions.nimlib"
+nimlib.avchat = "com.netease.nimlib:avchat:$versions.nimlib"
+deps.nimlib = nimlib
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+deps.room = room
+
+def dokit = [:]
+dokit.doraemonkit = "com.didichuxing.doraemonkit:doraemonkit:$versions.doraemonkit"
+dokit.doraemonkit_no_op = "com.didichuxing.doraemonkit:doraemonkit-no-op:$versions.doraemonkit"
+deps.dokit = dokit
+
+def huawei = [:]
+huawei.push = "com.huawei.android.hms:push:$versions.huawei"
+huawei.base = "com.huawei.android.hms:base:$versions.huawei"
+deps.huawei = huawei
+
+def commonmark = [:]
+commonmark.commonmark = "com.atlassian.commonmark:commonmark:$versions.commonMarkVersion"
+commonmark.commonmark_strikethrough = "com.atlassian.commonmark:commonmark-ext-gfm-strikethrough:$versions.commonMarkVersion"
+commonmark.commonmark_table = "com.atlassian.commonmark:commonmark-ext-gfm-tables:$versions.commonMarkVersion"
+commonmark.android_svg = "com.caverock:androidsvg:1.4"
+commonmark.android_gif = "pl.droidsonroids.gif:android-gif-drawable:1.2.15"
+deps.commonmark = commonmark
+
+deps.multidex = "androidx.multidex:multidex:$versions.multidex"
+deps.umeng = "com.umeng.analytics:analytics:$versions.umeng"
+deps.zxing = "com.google.zxing:core:$versions.zxing"
+deps.stetho = "com.facebook.stetho:stetho:$versions.stetho"
+deps.tlog = "com.techwolf.lib:tlog:$versions.tlog"
+deps.wechat = "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$versions.wechat"
+deps.qbusict = "nl.qbusict:cupboard:$versions.qbusict"
+deps.soloader = "com.facebook.soloader:soloader:$versions.soloader"
+deps.okhttp3 = "com.squareup.okhttp3:okhttp:$versions.okhttp3"
+
+deps.gson = "com.google.code.gson:gson:$versions.gson"
+deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
+deps.gallery = "com.hpbr.bosszhipin:module-gallery:$versions.gallery"
+
+deps.dcendents = "com.github.dcendents:android-maven-gradle-plugin:$versions.dcendents"
+deps.jfrog = "com.jfrog.bintray.gradle:gradle-bintray-plugin:$versions.jfrog"
+
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.tinker_gradle_plugin = "com.tencent.bugly:tinker-support:$versions.tinker_gradle_plugin"
+
+deps.google_protobuf = "com.google.protobuf:protobuf-gradle-plugin:$versions.google_protobuf"
+
+deps.wcdb_room = "com.tencent.wcdb:room:$versions.wcdb_room"
+deps.wcdb_android = "com.tencent.wcdb:wcdb-android:$versions.wcdb_android"
+
+deps.lottie = "com.airbnb.android:lottie:$versions.lottie"
+
+deps.protobuf = "com.google.protobuf:protobuf-java:$versions.protobuf"
+
+deps.smartrefresh = "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartrefresh"
+
+deps.stetho = "com.facebook.stetho:stetho:$versions.stetho"
+deps.stetho_okhttp = "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
+deps.protobuf_format = "com.googlecode.protobuf-java-format:protobuf-java-format:$versions.protobuf_format"
+deps.shortcutbadger = "me.leolin:ShortcutBadger:$versions.shortcutbadger"
+deps.startup = "com.twl.startup:startup:$versions.startup"
+deps.paging = "androidx.paging:paging-runtime:$versions.paging"
+
+deps.magic_indicator = "com.github.hackware1993:MagicIndicator:$versions.magic_indicator"
+deps.apm = "com.hpbr.bosszhipin:module-apm:$versions.apm"
+
+ext.deps = deps
+
+
+def build_versions = [:]
+build_versions.min_sdk = 23
+build_versions.target_sdk = 28
+build_versions.build_tools = "28.0.3"
+ext.build_versions = build_versions
+
+def addPluginRepos(RepositoryHandler handler) {
+    handler.maven {
+        url "https://maven.aliyun.com/repository/jcenter"
+    }
+    handler.maven {
+        url "https://maven.aliyun.com/repository/google"
+    }
+    handler.maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    handler.maven { url "http://android.weizhipin.com/nexus/content/repositories/releases/" }
+}
+
+def addRepos(RepositoryHandler handler) {
+    handler.flatDir { dirs "$projectDir/libs" }
+    handler.maven { url "http://android.weizhipin.com/nexus/content/repositories/releases/" }
+    handler.maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    handler.maven { url 'https://maven.aliyun.com/repository/central' }
+    handler.maven { url 'https://maven.aliyun.com/repository/google' }
+    handler.maven { url 'https://maven.aliyun.com/repository/jcenter' }
+    // Techwolf Maven服务器URL
+
+    handler.maven { url "http://dl.bintray.com/piasy/maven" }
+    handler.maven { url 'https://jitpack.io' }
+    handler.maven { url 'http://developer.huawei.com/repo/' }
+
+//    handler.jcenter()
+//    handler.mavenCentral()
+//    handler.google()
+}
+
+ext.addRepos = this.&addRepos
+ext.addPluginRepos = this.&addPluginRepos

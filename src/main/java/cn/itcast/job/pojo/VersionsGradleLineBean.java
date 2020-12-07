@@ -13,8 +13,12 @@ public class VersionsGradleLineBean implements Serializable, Cloneable {
     private String line;
     private String key;//等号前边的内容   deps.umeng
     private String value;//等号后边的内容 "com.umeng.analytics:analytics:$versions.umeng"
-    private String libraryName;//com.umeng.analytics:analytics
     private String version;//等号后边的内容,取得的版本号 $versions.umeng
+
+    private String groupAndLibraryName;//com.umeng.analytics:analytics
+    private String groupName;//com.umeng.analytics
+    private String libraryName;//analytics
+
     private String versionListed;//版本号单独列出来的 6.1.2
     private String lastVersion;//最新版本号 6.9.0
     private List<LinkVersionBean> linkVersionBeanList = new ArrayList<>();//版本号,link list,可能多个仓库最新的版本号不一样，都保存着
@@ -22,6 +26,8 @@ public class VersionsGradleLineBean implements Serializable, Cloneable {
     private boolean manyLibUseSameVersionListedButTheyAreNotSame;//多个依赖使用同一个例如versions.umeng，但是他们最新的不一样
     private boolean duplicate;//重复了
     private boolean isVersionLine;//是否是版本行
+
+    private boolean versionLineDuplicate;//版本行重复
 
     public VersionsGradleLineBean(String line) {
         this.line = line;
@@ -34,14 +40,29 @@ public class VersionsGradleLineBean implements Serializable, Cloneable {
 
                 if (numOfMaoHao >= 2) {
                     version = value.substring(value.lastIndexOf(":") + 1, value.length() - 1);
+
+                    String endStr = "";
+                    if (line.contains("'")) {
+                        endStr = line.substring(line.indexOf("'") + 1);
+                    } else if (line.contains("\"")) {
+                        endStr = line.substring(line.indexOf("\"") + 1);
+                    }
+                    String[] array = endStr.split(":");
+                    groupName = array[0];
+                    libraryName = array[1];
+                    setGroupAndLibraryName(array[0] + ":" + array[1]);
                 }
             }
         }
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    //region get/set
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     public String getLibraryName() {
@@ -50,6 +71,14 @@ public class VersionsGradleLineBean implements Serializable, Cloneable {
 
     public void setLibraryName(String libraryName) {
         this.libraryName = libraryName;
+    }
+
+    public String getGroupAndLibraryName() {
+        return groupAndLibraryName;
+    }
+
+    public void setGroupAndLibraryName(String groupAndLibraryName) {
+        this.groupAndLibraryName = groupAndLibraryName;
     }
 
     public List<LinkVersionBean> getLinkVersionBeanList() {
@@ -84,8 +113,54 @@ public class VersionsGradleLineBean implements Serializable, Cloneable {
         this.versionListed = versionListed;
     }
 
+    public String getLine() {
+        return line;
+    }
+
+    public void setLine(String line) {
+        this.line = line;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public boolean isVersionLineDuplicate() {
+        return versionLineDuplicate;
+    }
+
+    public void setVersionLineDuplicate(boolean versionLineDuplicate) {
+        this.versionLineDuplicate = versionLineDuplicate;
+    }
+    //endregion
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
     public String getLastVersionReport() {
-        if (false && getLibraryName().contains("StrongToolsRecyclerView")) {
+        if (false && getGroupAndLibraryName().contains("StrongToolsRecyclerView")) {
             int i = 0;
         }
         if (manyLibUseSameVersionListedButTheyAreNotSame) {
@@ -173,37 +248,6 @@ public class VersionsGradleLineBean implements Serializable, Cloneable {
         return line;
     }
 
-    public String getLine() {
-        return line;
-    }
-
-    public void setLine(String line) {
-        this.line = line;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
 
     private int search(String str, String strRes) {//查找字符串里与指定字符串相同的个数
         int n = 0;//计数器
@@ -216,6 +260,9 @@ public class VersionsGradleLineBean implements Serializable, Cloneable {
     }
 
     public String getHtml() {
+        if (versionLineDuplicate) {
+            return line + " <font color=\"red\"> -> duplicate version,can delete!!! </font>";
+        }
         if (duplicate) {
             return line + " <font color=\"red\"> -> duplicate library,can delete!!! </font>";
         }
@@ -291,10 +338,5 @@ public class VersionsGradleLineBean implements Serializable, Cloneable {
             return newVersionName;
         }
         return null;
-    }
-
-    public static class LinkVersionBean implements Serializable {
-        public String link;
-        public String version;
     }
 }

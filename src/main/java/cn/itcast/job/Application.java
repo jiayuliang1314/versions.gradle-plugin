@@ -6,7 +6,7 @@ public class Application {
 
     public static void main(String[] args) {
         CheckVersionTask checkVersionTask = new CheckVersionTask();
-        if(false){
+        if(true){
             try {
                 checkVersionTask.process("/Users/admin/StudioProjects/wavely2/versions.gradle", "/Users/admin/StudioProjects/wavely2/report.html");
             } catch (Exception e) {

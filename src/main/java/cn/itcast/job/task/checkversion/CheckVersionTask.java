@@ -2,6 +2,7 @@ package cn.itcast.job.task.checkversion;
 
 import cn.itcast.job.pojo.VersionsGradleLineBean;
 import cn.itcast.job.utils.FileUtil;
+import cn.itcast.job.utils.StringUtil;
 import org.jsoup.Jsoup;
 import us.codecraft.webmagic.*;
 import us.codecraft.webmagic.downloader.CustomRedirectStrategy;
@@ -15,15 +16,13 @@ import java.io.IOException;
 import java.security.Security;
 import java.util.*;
 
+import static cn.itcast.job.cache.ConfigConstant.File_OF_VERSION;
+import static cn.itcast.job.cache.ConfigConstant.REPORT_PATH;
+import static cn.itcast.job.cache.VersionsGradleInfosCache.*;
+import static cn.itcast.job.utils.StringUtil.search;
 
 public class CheckVersionTask implements PageProcessor {
-    public String File_OF_VERSION = "";
-    public String REPORT_PATH = "";
-    private Map<String, VersionsGradleLineBean> mapOfKeysAndVersions = new HashMap<>();//代表有等号的左右相关的map，左边为key，右边为value
-    private Map<String, VersionsGradleLineBean> mapOfLibrary = new HashMap<>();//用于检查是否有重复的依赖，作用范围在process里
-    private List<Request> requestList = new ArrayList<>();
-    private List<VersionsGradleLineBean> gradleLineBeans = new ArrayList<>();
-    private List<String> repos = new ArrayList<>();
+//    private List<String> repos = new ArrayList<>();//用于输出仓库名，辅助用
     private Site site = Site.me()
             .setCharset("utf8")//设置编码
             .setSleepTime(5 * 1000)//睡眠时间
@@ -42,6 +41,10 @@ public class CheckVersionTask implements PageProcessor {
     public void process(String fileOfVersion, String reportPath) throws Exception {
         File_OF_VERSION = fileOfVersion;
         REPORT_PATH = reportPath;
+        gradleLineBeans.clear();
+        mapOfKeysAndVersions.clear();
+        mapOfGroupLibraryNameAndDetailLine.clear();
+        List<Request> requestList = new ArrayList<>();
         FileUtil.readFileEveryLine(File_OF_VERSION, new FileUtil.ControlFileEveryLineCallback() {
             @Override
             public void control(String line) throws IOException {
@@ -49,7 +52,7 @@ public class CheckVersionTask implements PageProcessor {
                 gradleLineBeans.add(versionsGradleLineBean);
             }
         });
-
+        Map<String, VersionsGradleLineBean> mapOfLibrary = new HashMap<>();//用于检查是否有重复的依赖，作用范围在process里
         for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeans) {
             String line = versionsGradleLineBean.getLine();
             if (line != null && line.length() > 0) {
@@ -58,45 +61,22 @@ public class CheckVersionTask implements PageProcessor {
 
                 if (numOfMaoHao >= 2) {
                     System.out.println("numOfMaoHao " + numOfMaoHao);
-                    String endStr = "";
-                    if (line.contains("'")) {
-                        endStr = line.substring(line.indexOf("'") + 1);
-                    } else if (line.contains("\"")) {
-                        endStr = line.substring(line.indexOf("\"") + 1);
-                    }
-                    String[] array = endStr.split(":");
-
-
                     //1.判断是否重复了
-                    String key = array[0] + "/" + array[1];
-                    versionsGradleLineBean.setLibraryName(array[0] + ":" + array[1]);
+                    String key = versionsGradleLineBean.getGroupName() + "/" + versionsGradleLineBean.getLibraryName();
+
                     if (!mapOfLibrary.containsKey(key)) {
                         mapOfLibrary.put(key, versionsGradleLineBean);
                         versionsGradleLineBean.setDuplicate(false);
-                        //2.google android 相关的包，去访问google 的maven,测试不好使
-//                        if (array[0].startsWith("android.") ||
-//                                array[0].startsWith("androidx.") ||
-//                                array[0].startsWith("com.android") ||
-//                                array[0].startsWith("com.crashlytics.sdk.android") ||
-//                                array[0].startsWith("com.google.") ||
-//                                array[0].startsWith("io.fabric.sdk.android") ||
-//                                array[0].startsWith("org.chromium.net") ||
-//                                array[0].startsWith("org.jetbrains.kotlin") ||
-//                                array[0].startsWith("tools.base.build-system.debug") ||
-//                                array[0].startsWith("zipflinger")
-//                        ) {
-//                            Request request = new Request("https://maven.google.com/web/index.html#androidx.recyclerview:recyclerview"/*"https://maven.google.com/web/index.html#" + array[0] + ":" + array[1]*/);
-//                            request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
-//                            requestList.add(request);
-//                        }
-                        //3.加上mvnrepository
-                        {
-                            Request request = new Request("https://mvnrepository.com/artifact/" + array[0] + "/" + array[1]);
-                            request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
-                            request.putExtra("array0", array[0]);
-                            request.putExtra("array1", array[1]);
-                            requestList.add(request);
-                        }
+
+                        Request request = new Request(
+                                "https://mvnrepository.com/artifact/"
+                                        + versionsGradleLineBean.getGroupName()
+                                        + "/"
+                                        + versionsGradleLineBean.getLibraryName());
+                        request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
+                        request.putExtra("groupName", versionsGradleLineBean.getGroupName());
+                        request.putExtra("libraryName", versionsGradleLineBean.getLibraryName());
+                        requestList.add(request);
                     } else {
                         versionsGradleLineBean.setDuplicate(true);
                     }
@@ -105,6 +85,12 @@ public class CheckVersionTask implements PageProcessor {
 
             System.out.println(versionsGradleLineBean);
             if (versionsGradleLineBean.getKey() != null && versionsGradleLineBean.getValue() != null) {
+                if (mapOfKeysAndVersions.containsKey(versionsGradleLineBean.getKey())
+                        && StringUtil.search(versionsGradleLineBean.getValue(), "\"") == 2
+                        && StringUtil.search(versionsGradleLineBean.getValue(), ":") == 0
+                ) {
+                    mapOfKeysAndVersions.get(versionsGradleLineBean.getKey()).setVersionLineDuplicate(true);
+                }
                 mapOfKeysAndVersions.put(versionsGradleLineBean.getKey(), versionsGradleLineBean);
             }
         }
@@ -123,7 +109,6 @@ public class CheckVersionTask implements PageProcessor {
                 .setDownloader(new MyHttpClientDownloader())
                 .setSpiderListeners(list)
                 .run();
-
     }
 
     @Override
@@ -133,8 +118,8 @@ public class CheckVersionTask implements PageProcessor {
                 || page.getRawText().contains("404 Not Found")
         ) {
             VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
-            String array0 = (String) page.getRequest().getExtra("array0");
-            String array1 = (String) page.getRequest().getExtra("array1");
+            String groupName = (String) page.getRequest().getExtra("groupName");
+            String libraryName = (String) page.getRequest().getExtra("libraryName");
             if (page.getStatusCode() != 404) {
                 String url = page.getUrl().toString();
                 System.out.println(url + "process happen Page status not 200 " + page.getStatusCode());
@@ -145,10 +130,10 @@ public class CheckVersionTask implements PageProcessor {
                 //4.加上jcenter
                 {
 //                            Request request = new Request("https://jcenter.bintray.com/com/google/android/flexbox/");
-                    Request request = new Request("https://jcenter.bintray.com/" + array0.replace(".", "/") + "/" + array1.replace(".", "/"));
+                    Request request = new Request("https://jcenter.bintray.com/" + groupName.replace(".", "/") + "/" + libraryName.replace(".", "/"));
                     request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
-                    request.putExtra("array0", array0);
-                    request.putExtra("array1", array1);
+                    request.putExtra("groupName", groupName);
+                    request.putExtra("libraryName", libraryName);
                     page.addTargetRequest(request);
                 }
             }
@@ -158,10 +143,10 @@ public class CheckVersionTask implements PageProcessor {
                 //5.加上jitpack
                 {
 //                    Request request = new Request("https://jitpack.io/com/github/jiayuliang1314/StrongToolsRecyclerView/");
-                    Request request = new Request("https://jitpack.io/" + array0.replace(".", "/") + "/" + array1.replace(".", "/"));
+                    Request request = new Request("https://jitpack.io/" + groupName.replace(".", "/") + "/" + libraryName.replace(".", "/"));
                     request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
-                    request.putExtra("array0", array0);
-                    request.putExtra("array1", array1);
+                    request.putExtra("groupName", groupName);
+                    request.putExtra("libraryName", libraryName);
                     page.addTargetRequest(request);
                 }
             }
@@ -171,9 +156,6 @@ public class CheckVersionTask implements PageProcessor {
             }
         } else {
             String url = page.getUrl().toString();
-            if (url.startsWith("https://maven.google.com/web/index.html#")) {
-                processMavenGoogle(page, url);
-            }
             if (url.startsWith("https://mvnrepository.com/artifact/")) {
                 processMvnrepository(page, url);
             }
@@ -228,8 +210,8 @@ public class CheckVersionTask implements PageProcessor {
      */
     private void processMvnrepository(Page page, String url) {
         VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
-        String array0 = (String) page.getRequest().getExtra("array0");
-        String array1 = (String) page.getRequest().getExtra("array1");
+        String groupName = (String) page.getRequest().getExtra("groupName");
+        String libraryName = (String) page.getRequest().getExtra("libraryName");
 
         //                System.out.println("link before " + url);
         String companyRedirectWebsit = CustomRedirectStrategy.RedirectMap.get(url);
@@ -252,7 +234,7 @@ public class CheckVersionTask implements PageProcessor {
             String href = selectable.css("a", "href").get();
             System.out.println("processMvnrepository href " + href);
             if (href.contains("=")) {
-                repos.add(href.substring(href.lastIndexOf("=") + 1));
+//                repos.add(href.substring(href.lastIndexOf("=") + 1));
             }
             if (href.contains("Spring") || href.contains("spring") || href.contains("redhat") || href.contains("icm")) {
                 //springio-libs-release
@@ -267,151 +249,16 @@ public class CheckVersionTask implements PageProcessor {
 
             Request request = new Request("https://mvnrepository.com" + href);
             request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
-            request.putExtra("array0", array0);
-            request.putExtra("array1", array1);
+            request.putExtra("groupName", groupName);
+            request.putExtra("libraryName", libraryName);
             page.addTargetRequest(request);
         }
-    }
-
-    /**
-     * 不好使
-     *
-     * @param page
-     * @param url
-     */
-    private void processMavenGoogle(Page page, String url) {
-        //                System.out.println("link before " + url);
-        String companyRedirectWebsit = CustomRedirectStrategy.RedirectMap.get(url);
-//                System.out.println("link after " + companyRedirectWebsit);
-        String version = "";
-//                <div class="main-footer-text page-centered"><p><a href="https://www.outreach.io/">Outreach Home Page</a></p><a href="https://lever.co/" class="image-link"><span>Jobs powered by </span><img alt="Lever logo" src="/img/lever-logo-full.svg"></a></div>
-        try {
-            version = Jsoup.parse(page.getHtml().css("span.ng-binding").get()).text().trim();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(url + " " + version);
-        VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
-        versionsGradleLineBean.setLastVersion(version, url);
     }
     //endregion
 
     //region done
     public void done() {
-        for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeans) {
-            if (versionsGradleLineBean.getVersion() != null && versionsGradleLineBean.getVersion().startsWith("$")) {
-                VersionsGradleLineBean versionSpicalLine = mapOfKeysAndVersions.get(versionsGradleLineBean.getVersion().replace("$", ""));
-                if (versionSpicalLine != null) {
-                    String versionListed = versionSpicalLine.getValue();
-                    versionsGradleLineBean.setVersionListed(versionListed
-                            .replace("\"", "")
-                            .replace("'", ""));
-
-                    boolean manyLibUseSameVersionListedButTheyAreNotSame =
-                            versionSpicalLine.setLastVersionAndCheck(
-                                    versionsGradleLineBean.getLastVersion(),
-                                    versionsGradleLineBean.getLinkVersionBeanList(),
-                                    versionsGradleLineBean);
-                    versionsGradleLineBean.setManyLibUseSameVersionListedButTheyAreNotSame(manyLibUseSameVersionListedButTheyAreNotSame);
-                }
-            }
-        }
-
-        String detail = "<h1>功能：</h1>" +
-                "1.  versions.gradle 文件格式化<br>" +
-                "2.  依赖最新版本号列表 给出链接，点击跳转到网页<br>" +
-                "3.  versions.gradle 按行给出最新版本提示<br>" +
-                "4.  依赖去重复 <font color=\"red\"> -> duplicate library,can delete!!! </font><br>" +
-                "5.  多个依赖使用同一个版本，但是他们有独立的版本号 ，给出提示  <font color=\"green\">Many Lib Use Same $Version, But They Are Not Same</font><br>" +
-                "    例如：androidx.annotation = \"androidx.annotation:annotation:$versions.androidx\"" +
-                "         " + "androidx.core = \"androidx.core:core:$versions.androidx\" 都使用了$versions.androidx，但他们的最新版本号不同<br>" +
-                "<br>" +
-                "<br>";
-
-        detail += "<br><h1>1.  versions.gradle 文件格式化</h1><br>";
-
-        List<VersionsGradleLineBean> gradleLineBeansCopy = new ArrayList<>();
-        for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeans) {
-            try {
-                gradleLineBeansCopy.add((VersionsGradleLineBean) versionsGradleLineBean.clone());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        List<VersionsGradleLineBean> newVersionLines = new ArrayList<>();
-        for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeansCopy) {
-            if (versionsGradleLineBean.getFormatVersion() != null) {
-                VersionsGradleLineBean newVersion = new VersionsGradleLineBean(versionsGradleLineBean.getFormatVersion());
-                newVersionLines.add(newVersion);
-            }
-        }
-        gradleLineBeansCopy.addAll(2, newVersionLines);
-
-        for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeansCopy) {
-            detail += versionsGradleLineBean.getFormatKeyVersion();
-            detail += "<br>";
-        }
-
-        detail += "<br><h1>2.  依赖最新版本号列表 给出链接，点击跳转到网页</h1><br>";
-        detail += "<table border=\"1\">\n" +
-                "<tr>\n" +
-                "<td>" + "Library Name" + "</td>\n" +
-                "<td>" + "Version" + "</td>\n" +
-                "<td>" + "Version Listed" + "</td>\n" +
-                "<td>" + "Version Latest" + "</td>\n" +
-                "<td>" + "Link" + "</td>\n" +
-                "<td>" + "ManyLibUseSameVersionButTheyAreNotSame" + "</td>\n" +
-                "</tr>\n";
-        for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeans) {
-            if (versionsGradleLineBean != null && !versionsGradleLineBean.isDuplicate() && versionsGradleLineBean.getLibraryName() != null && versionsGradleLineBean.getLibraryName().length() > 0) {
-                detail += "<tr>\n" +
-                        "<td>" + versionsGradleLineBean.getLibraryName() + "</td>\n" +
-                        "<td>" + (versionsGradleLineBean.getVersion() == null ? "" : versionsGradleLineBean.getVersion()) + "</td>\n" +
-                        "<td>" + (versionsGradleLineBean.getVersionListed() == null ? "" : versionsGradleLineBean.getVersionListed()) + "</td>\n" +
-                        "<td>" + (versionsGradleLineBean.getLastVersionReport()) + "</td>\n" +
-                        "<td>" + versionsGradleLineBean.getLinkVersionBeanListHtml() + "</td>\n" +
-                        "<td>" + (versionsGradleLineBean.isManyLibUseSameVersionListedButTheyAreNotSame() ? " <font color=\"green\">Many Lib Use Same $Version, But They Are Not Same</font>" : "") + "</td>\n" +
-                        "</tr>\n";
-            }
-        }
-        detail += "</table>\n";
-
-        detail += "<br><h1>3.  versions.gradle 按行给出最新版本提示</h1><br>";
-        for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeans) {
-            System.out.println(versionsGradleLineBean);
-            detail += versionsGradleLineBean.getHtml();
-            detail += "<br>";
-        }
-
-        String content = "<html>\n" +
-                "<head>\n" +
-                "<meta charset=\"utf-8\">\n" +
-                "</head>\n" +
-                "<body>\n" +
-                detail +
-                "<body>\n" +
-                "</html>\n";
-        FileUtil.writeFile(REPORT_PATH, content, false);
-
-        //利用HashSet去重
-        Set<String> set = new HashSet<String>(repos);
-        repos = new ArrayList<String>(set);
-        for (String item : repos) {
-            System.out.println(item);
-        }
-    }
-    //endregion
-
-    //region 查找字符串里与指定字符串相同的个数
-    public int search(String str, String strRes) {//查找字符串里与指定字符串相同的个数
-        int n = 0;//计数器
-        while (str.indexOf(strRes) != -1) {
-            int i = str.indexOf(strRes);
-            n++;
-            str = str.substring(i + 1);
-        }
-        return n;
+        ReportTask.done();
     }
     //endregion
 
@@ -445,6 +292,4 @@ public class CheckVersionTask implements PageProcessor {
         }
     }
     //endregion
-
-
 }

@@ -33,11 +33,12 @@ public class ReportTask {
         String detail = "<h1>功能：</h1>" +
                 "1.  versions.gradle 文件格式化<br>" +
                 "2.  依赖最新版本号列表 给出链接，点击跳转到网页<br>" +
-                "2.1 依赖最终使用的版本和version.gradle声明的不同，给出提示<br>" +
-                "3.  versions.gradle 按行给出最新版本提示<br>" +
-                "4.  版本号去重复 <font color=\"red\"> -> duplicate version,can delete!!! </font><br>" +
-                "4.1 依赖去重复 <font color=\"red\"> -> duplicate library,can delete!!! </font><br>" +
-                "5.  多个依赖使用同一个版本，但是他们有独立的版本号 ，给出提示  <font color=\"green\">Many Lib Use Same $Version, But They Are Not Same</font><br>" +
+                "3.  依赖最终使用的版本和version.gradle声明的不同，给出提示<br>" +
+                "4.  versions.gradle 按行给出最新版本提示<br><br><br>" +
+                "其他<br>" +
+                "a). 版本号去重复 <font color=\"red\"> -> duplicate version,can delete!!! </font><br>" +
+                "    依赖去重复 <font color=\"red\"> -> duplicate library,can delete!!! </font><br>" +
+                "b). 多个依赖使用同一个版本，但是他们有独立的版本号 ，给出提示  <font color=\"green\">Many Lib Use Same $Version, But They Are Not Same</font><br>" +
                 "    例如：androidx.annotation = \"androidx.annotation:annotation:$versions.androidx\"" +
                 "         " + "androidx.core = \"androidx.core:core:$versions.androidx\" 都使用了$versions.androidx，但他们的最新版本号不同<br>" +
                 "<br>" +
@@ -93,8 +94,9 @@ public class ReportTask {
         }
         detail += "</table>\n";
 
+        detail += "<br><h1>3.  依赖最终使用的版本和version.gradle声明的不同，给出提示</h1><br>";
 
-        detail += "<br><h1>3.  versions.gradle 按行给出最新版本提示</h1><br>";
+        detail += "<br><h1>4.  versions.gradle 按行给出最新版本提示</h1><br>";
         for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeans) {
             System.out.println(versionsGradleLineBean);
             detail += versionsGradleLineBean.getHtml();

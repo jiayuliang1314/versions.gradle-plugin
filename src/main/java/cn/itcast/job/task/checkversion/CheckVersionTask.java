@@ -385,6 +385,9 @@ public class CheckVersionTask implements PageProcessor {
         }
 
         String content = "<html>\n" +
+                "<head>\n" +
+                "<meta charset=\"utf-8\">\n" +
+                "</head>\n" +
                 "<body>\n" +
                 detail +
                 "<body>\n" +

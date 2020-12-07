@@ -1,12 +1,14 @@
 package cn.itcast.job.utils;
 
 //import lombok.extern.slf4j.Slf4j;
+
 import okio.BufferedSink;
 import okio.BufferedSource;
 import okio.Okio;
 import okio.Source;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 //ok
 //@Slf4j
@@ -176,11 +178,15 @@ public class FileUtil {
             return false;
         }
 
-        FileWriter fileWriter = null;
+        File file1 = new File(filePath);
+        Writer fileWriter = null;
         try {
             makeDirs(filePath);
-            fileWriter = new FileWriter(filePath, append);
+            fileWriter = new BufferedWriter(
+                    new OutputStreamWriter(
+                            new FileOutputStream(file1), StandardCharsets.UTF_8));//new FileWriter(filePath, append);
             fileWriter.write(content);
+            fileWriter.flush();
             fileWriter.close();
             return true;
         } catch (IOException e) {

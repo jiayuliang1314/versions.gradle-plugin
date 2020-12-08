@@ -1,5 +1,6 @@
 package cn.itcast.job.task.checkversion;
 
+import cn.itcast.job.cache.ConfigConstant;
 import cn.itcast.job.pojo.VersionsGradleLineBean;
 import cn.itcast.job.utils.FileUtil;
 import cn.itcast.job.utils.StringUtil;
@@ -14,7 +15,10 @@ import us.codecraft.webmagic.selector.Selectable;
 
 import java.io.IOException;
 import java.security.Security;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static cn.itcast.job.cache.ConfigConstant.File_OF_VERSION;
 import static cn.itcast.job.cache.ConfigConstant.REPORT_PATH;
@@ -22,7 +26,7 @@ import static cn.itcast.job.cache.VersionsGradleInfosCache.*;
 import static cn.itcast.job.utils.StringUtil.search;
 
 public class CheckVersionTask implements PageProcessor {
-//    private List<String> repos = new ArrayList<>();//用于输出仓库名，辅助用
+    //    private List<String> repos = new ArrayList<>();//用于输出仓库名，辅助用
     private Site site = Site.me()
             .setCharset("utf8")//设置编码
             .setSleepTime(5 * 1000)//睡眠时间
@@ -30,7 +34,7 @@ public class CheckVersionTask implements PageProcessor {
             .setRetrySleepTime(3000)//设置重试的间隔时间
             .setRetryTimes(3)//设置重试的次数
             .setCycleRetryTimes(6)//设置重试的次数
-            .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 SE 2.X MetaSr 1.0");
+            .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50");
 
     @Override
     public Site getSite() {
@@ -38,8 +42,9 @@ public class CheckVersionTask implements PageProcessor {
         return site;
     }
 
-    public void process(String fileOfVersion, String reportPath) throws Exception {
+    public void process(String fileOfVersion, String dependices, String reportPath) throws Exception {
         File_OF_VERSION = fileOfVersion;
+        ConfigConstant.DEPENDICES_PATH = dependices;
         REPORT_PATH = reportPath;
         gradleLineBeans.clear();
         mapOfKeysAndVersions.clear();

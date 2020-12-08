@@ -1,11 +1,10 @@
 package cn.itcast.job.pojo.dependices;
 
+import cn.itcast.job.cache.VersionsGradleInfosCache;
 import cn.itcast.job.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static cn.itcast.job.cache.VersionsGradleInfosCache.mapOfGroupLibraryNameAndVersionFromDependices;
 
 /**
  * +--- androidx.databinding:databinding-adapters:3.6.1
@@ -31,6 +30,7 @@ public class DependicesNode {
     public DependicesNode parent;//父节点
     public List<DependicesNode> childs = new ArrayList<>();//子节点
     public int numOfShugang = 0;//|的个数
+    public String line;
 
 
     public DependicesNode(boolean root, DependicesNode p) {
@@ -41,6 +41,7 @@ public class DependicesNode {
 
     public DependicesNode(String line) {
         System.out.println("line " + line);
+
         isRoot = false;
         String detail = line.substring(line.indexOf("--- ") + 4);
         int frist = detail.indexOf(":");
@@ -58,26 +59,32 @@ public class DependicesNode {
                 version = detailVersion.substring(0, detailVersion.indexOf(" -> "));
                 versionAfterArrow = detailVersion.substring(detailVersion.indexOf(" -> ") + 4);
                 System.out.println("versionAfterArrow " + versionAfterArrow);
-                mapOfGroupLibraryNameAndVersionFromDependices.put(moudle + ":" + library, versionAfterArrow);
+//                mapOfGroupLibraryNameAndVersionFromDependices.put(moudle + ":" + library, versionAfterArrow);
+                VersionsGradleInfosCache.putInMapOfGroupLibraryNameAndVersionFromDependices(moudle + ":" + library, versionAfterArrow, this);
             } else {
                 isHaveStar = true;
                 version = detailVersion.replace(" (*)", "");
-                mapOfGroupLibraryNameAndVersionFromDependices.put(moudle + ":" + library, version);
+//                mapOfGroupLibraryNameAndVersionFromDependices.put(moudle + ":" + library, version);
+                VersionsGradleInfosCache.putInMapOfGroupLibraryNameAndVersionFromDependices(moudle + ":" + library, version, this);
             }
         } else if (detailVersion.contains(" -> ")) {
             isHaveArrow = true;
             version = detailVersion.substring(0, detailVersion.indexOf(" -> "));
             versionAfterArrow = detailVersion.substring(detailVersion.indexOf(" -> ") + 4);
             System.out.println("versionAfterArrow " + versionAfterArrow);
-            mapOfGroupLibraryNameAndVersionFromDependices.put(moudle + ":" + library, versionAfterArrow);
+//            mapOfGroupLibraryNameAndVersionFromDependices.put(moudle + ":" + library, versionAfterArrow);
+            VersionsGradleInfosCache.putInMapOfGroupLibraryNameAndVersionFromDependices(moudle + ":" + library, versionAfterArrow, this);
         } else {
             isHaveStar = false;
             isHaveArrow = false;
             version = detailVersion;
             versionAfterArrow = null;
-            mapOfGroupLibraryNameAndVersionFromDependices.put(moudle + ":" + library, version);
+//            mapOfGroupLibraryNameAndVersionFromDependices.put(moudle + ":" + library, version);
+            VersionsGradleInfosCache.putInMapOfGroupLibraryNameAndVersionFromDependices(moudle + ":" + library, version, this);
         }
         numOfShugang = StringUtil.search(line, "|");
+
+        this.line = line.replace(" ","&nbsp;");
     }
 
     @Override

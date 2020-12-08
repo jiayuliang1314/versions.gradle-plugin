@@ -1,5 +1,6 @@
 package cn.itcast.job.task.checkversion;
 
+import cn.itcast.job.cache.ConfigConstant;
 import cn.itcast.job.pojo.dependices.DependicesNode;
 import cn.itcast.job.utils.FileUtil;
 import cn.itcast.job.utils.StringUtil;
@@ -13,7 +14,7 @@ public class DependicesFileReadAndGetTree {
 
     public static DependicesNode dependicesFileReadAndGetTree() {
 
-        FileUtil.readFileEveryLine("/Users/admin/StudioProjects/wavely2/dependices.txt",
+        FileUtil.readFileEveryLine(ConfigConstant.DEPENDICES_PATH,
                 new FileUtil.ControlFileEveryLineCallback() {
                     @Override
                     public void control(String line) throws IOException {

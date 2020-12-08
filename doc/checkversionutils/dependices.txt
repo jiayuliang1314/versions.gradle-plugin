@@ -1,0 +1,154 @@
+
+> Configure project :
+tlint.enable=null
+tlint.commit=null
+tlintCommit = true
+onBuildApply checkTLint: false
+
+> Configure project :app
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+WARNING: The option setting 'android.enableSeparateAnnotationProcessing=true' is experimental and unsupported.
+The current default is 'false'.
+
+
+> Configure project :b_kernel
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :commons
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :DiscreetAppRate
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :lib_base
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :lib_chat
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :lib_map
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :lib_mobile_mqtt_service
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :lib_sdk
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :lib_wavelyui
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :m_boss
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :m_geek
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :zxinglibrary
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :lib_markwon:markwon-core
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :lib_markwon:markwon-image
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Configure project :lib_markwon:markwon-recycler
+WARNING: The following project options are deprecated and have been removed: 
+android.databinding.enableV2
+Databinding v1 is removed.
+
+
+
+> Task :app:dependencies
+
+------------------------------------------------------------
+Project :app
+------------------------------------------------------------
+
+prodReleaseRuntimeClasspath - Resolved configuration for runtime for variant: prodRelease
++--- androidx.multidex:multidex:2.0.0
++--- androidx.databinding:databinding-common:3.6.1
++--- androidx.databinding:databinding-runtime:3.6.1
+|    +--- androidx.databinding:viewbinding:3.6.1
+|    |    \--- androidx.annotation:annotation:1.0.0 -> 1.1.0
+|    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.2.0
+|    |    +--- androidx.lifecycle:lifecycle-common:2.2.0
+|    |    |    \--- androidx.annotation:annotation:1.1.0
+|    |    +--- androidx.arch.core:core-common:2.1.0
+|    |    |    \--- androidx.annotation:annotation:1.1.0
+|    |    \--- androidx.annotation:annotation:1.1.0
+|    +--- androidx.collection:collection:1.0.0 -> 1.1.0
+|    |    \--- androidx.annotation:annotation:1.1.0
+|    \--- androidx.databinding:databinding-common:3.6.1
++--- androidx.databinding:databinding-adapters:3.6.1
+|    +--- androidx.databinding:databinding-common:3.6.1
+|    \--- androidx.databinding:databinding-runtime:3.6.1 (*)
+\--- com.hpbr.bosszhipin:module-kit-no-op:4.2.8.2.3 (*)
+
+(*) - dependencies omitted (listed previously)
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed

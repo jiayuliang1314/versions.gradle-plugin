@@ -1,15 +1,20 @@
 package cn.itcast.job.task.checkversion;
 
 import cn.itcast.job.pojo.VersionsGradleLineBean;
+import cn.itcast.job.pojo.dependices.DependicesNode;
+import cn.itcast.job.utils.CollectionsUtils;
 import cn.itcast.job.utils.FileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static cn.itcast.job.cache.ConfigConstant.REPORT_PATH;
 import static cn.itcast.job.cache.VersionsGradleInfosCache.*;
 
 public class ReportTask {
+    public static String detail;
+
     public static void done() {
         for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeans) {
             if (versionsGradleLineBean.getVersion() != null && versionsGradleLineBean.getVersion().startsWith("$")) {
@@ -30,7 +35,7 @@ public class ReportTask {
             }
         }
 
-        String detail = "<h1>功能：</h1>" +
+        detail = "<h1>功能：</h1>" +
                 "1.  versions.gradle 文件格式化<br>" +
                 "2.  依赖最新版本号列表 给出链接，点击跳转到网页<br>" +
                 "3.  依赖最终使用的版本和version.gradle声明的不同，给出提示<br>" +
@@ -95,6 +100,26 @@ public class ReportTask {
         detail += "</table>\n";
 
         detail += "<br><h1>3.  依赖最终使用的版本和version.gradle声明的不同，给出提示</h1><br>";
+        DependicesNode root = DependicesFileReadAndGetTree.dependicesFileReadAndGetTree();
+        CollectionsUtils.mapTraversal(mapOfGroupLibraryNameAndDetailLine, new CollectionsUtils.MapTraversalCallback<String, VersionsGradleLineBean>() {
+            @Override
+            public void visit(Map.Entry<String, VersionsGradleLineBean> entry) {
+                try {
+                    String key = entry.getKey();
+                    System.out.println("key " + key);
+                    String value = entry.getValue().getVersionListed();
+                    System.out.println("entry value " + value);
+                    if (value != null && mapOfGroupLibraryNameAndVersionFromDependices.get(key) != null && !mapOfGroupLibraryNameAndVersionFromDependices.get(key).equals(value)) {
+                        detail += key + " " + entry.getValue().getVersionListed() + " in versions.gradle,but " + mapOfGroupLibraryNameAndVersionFromDependices.get(key) + " resolved";
+                        detail += "<br>";
+                    } else {
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         detail += "<br><h1>4.  versions.gradle 按行给出最新版本提示</h1><br>";
         for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeans) {

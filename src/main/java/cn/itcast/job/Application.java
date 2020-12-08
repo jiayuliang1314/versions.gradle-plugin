@@ -1,10 +1,15 @@
 package cn.itcast.job;
 
 import cn.itcast.job.task.checkversion.CheckVersionTask;
+import cn.itcast.job.task.checkversion.DependicesFileReadAndGetTree;
 
 public class Application {
 
     public static void main(String[] args) {
+//        if(true){
+//            DependicesFileReadAndGetTree.dependicesFileReadAndGetTree();
+//            return;
+//        }
         CheckVersionTask checkVersionTask = new CheckVersionTask();
         if(true){
             try {

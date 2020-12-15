@@ -18,7 +18,7 @@ public class DependicesFileReadAndGetTree {
                 new FileUtil.ControlFileEveryLineCallback() {
                     @Override
                     public void control(String line) throws IOException {
-                        if (line != null && line.contains("--- ") && StringUtil.search(line, ":") == 2) {
+                        if (line != null && line.contains("--- ")) {
                             if (root == null) {
                                 root = new DependicesNode(true, null);
                                 stack.push(root);
@@ -37,7 +37,7 @@ public class DependicesFileReadAndGetTree {
                                 node.setParent(stack.peek());
                                 stack.push(node);
                             } else if (stack.peek().numOfShugang > node.numOfShugang) {
-                                while(!stack.isEmpty() && stack.peek().numOfShugang>=node.numOfShugang){
+                                while (!stack.isEmpty() && stack.peek().numOfShugang >= node.numOfShugang) {
                                     stack.pop();
                                 }
                                 DependicesNode parent = stack.peek();

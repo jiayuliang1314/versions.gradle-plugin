@@ -15,8 +15,10 @@ public class VersionsGradleInfosCache {
     public static Map<String, String> mapOfGroupLibraryNameAndVersionFromDependices = new HashMap<>();//代表有依赖名和版本号行的map
     public static Map<String, List<DependicesNode>> mapOfGroupLibraryNameAndVersionFromDependicesNodes = new HashMap<>();//代表有依赖名和版本号行的map
 
-    public static void putInMapOfGroupLibraryNameAndVersionFromDependices(String key,String version, DependicesNode dependicesNode) {
-        mapOfGroupLibraryNameAndVersionFromDependices.put(key,version);
+    public static void putInMapOfGroupLibraryNameAndVersionFromDependices(String key, String version, DependicesNode dependicesNode) {
+        if (version != null) {
+            mapOfGroupLibraryNameAndVersionFromDependices.put(key, version);
+        }
         List<DependicesNode> list = mapOfGroupLibraryNameAndVersionFromDependicesNodes.get(key);
         if (list == null) {
             list = new ArrayList<>();

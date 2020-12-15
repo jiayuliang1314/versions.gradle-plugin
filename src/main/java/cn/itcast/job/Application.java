@@ -1,14 +1,25 @@
 package cn.itcast.job;
 
+import cn.itcast.job.cache.ConfigConstant;
+import cn.itcast.job.pojo.dependices.DependicesNode;
 import cn.itcast.job.task.checkversion.CheckVersionTask;
+import cn.itcast.job.task.checkversion.DependicesFileReadAndGetTree;
 
 public class Application {
 
     public static void main(String[] args) {
         CheckVersionTask checkVersionTask = new CheckVersionTask();
+        if(false){
+            ConfigConstant.DEPENDICES_PATH = "/Users/admin/Documents/02-网络爬虫/workspace/new_version_check2/doc/checkversionutils/dependices.txt";
+            DependicesNode root = DependicesFileReadAndGetTree.dependicesFileReadAndGetTree();
+            System.out.println("end");
+            return;
+        }
         if (false) {
             try {
-                checkVersionTask.process("/Users/admin/StudioProjects/wavely2/versions.gradle", "/Users/admin/StudioProjects/wavely2/dependices.txt", "/Users/admin/StudioProjects/wavely2/report.html");
+                checkVersionTask.process("/Users/admin/Documents/02-网络爬虫/workspace/new_version_check2/doc/checkversionutils/versions.gradle",
+                        "/Users/admin/Documents/02-网络爬虫/workspace/new_version_check2/doc/checkversionutils/dependices.txt",
+                        "/Users/admin/Documents/02-网络爬虫/workspace/new_version_check2/doc/checkversionutils/report.html");
             } catch (Exception e) {
                 e.printStackTrace();
             }

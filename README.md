@@ -32,6 +32,8 @@ versions-gradle-checker-1.0.jar /user/admin/project1 /user/admin/project2 /Users
 3 {New='/Users/admin/StudioProjects/demo1/MainModule/src/main/java/demo1/re/BaseEncoder.java', 
    Old='/Users/admin/StudioProjects/demo2/MainModule/src/main/java/com/o00/oO0/ooo/re/BaseEncoder.java', 
    length=0}
+   
+   length小于等于3，说明文件很相似
 
 
 [参考]: http://blog.startry.com/2016/12/14/find-same-code-by-simhash-and-hamming-distance/

@@ -440,8 +440,37 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 循环遍历一个folder，对其每个文件进行操作
+     *
+     * @param src_dir  folder
+     * @param callback 具体要干哈，例如改名或者移动位置
+     */
+    public static void cyclicTraversalPath(File src_dir, ControlFileCallback callback) {
+        if (src_dir.isDirectory()) {
+//            Log.i("Folder " + src_dir.getName());
+            File[] src_files = src_dir.listFiles();
+            for (int i = 0; i < src_files.length; i++) {
+                cyclicTraversalPath(src_files[i], callback);
+            }
+        } else {
+            try {
+                callback.control(src_dir);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void cyclicTraversalPath(String src_dir, ControlFileCallback callback) {
+        cyclicTraversalPath(new File(src_dir), callback);
+    }
 
     public interface ControlFileEveryLineCallback {
         void control(String line) throws IOException;
+    }
+
+    public interface ControlFileCallback {
+        void control(File src_dir) throws Exception;
     }
 }

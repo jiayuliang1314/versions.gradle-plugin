@@ -34,6 +34,7 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:16.0" level="project" />
     <orderEntry type="library" name="Maven: com.lou:simhasher:0.0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:4.7.2" level="project" />
     <orderEntry type="library" name="Maven: com.janeluo:ikanalyzer:2012_u6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-queryparser:4.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-queries:4.7.2" level="project" />

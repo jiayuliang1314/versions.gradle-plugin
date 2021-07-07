@@ -5,7 +5,7 @@
 
 ## 使用方法
 
-1.本项目doc文件夹下找到versions-gradle-checker-1.0.jar
+1.本项目doc/simhash文件夹下找到versions-gradle-checker-1.0.jar
 
 2.Mac电脑使用命令行：
 

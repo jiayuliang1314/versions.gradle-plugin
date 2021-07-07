@@ -1,5 +1,5 @@
 
-# **Simhash Google出品，是一种局部敏感Hash。利用汉明距离去衡量simhash的相似度。汉明距离小于3说明相似度高。**
+## Simhash Google出品，是一种局部敏感Hash。利用汉明距离去衡量simhash的相似度。汉明距离小于3说明相似度高。
 
 ## 原理： [通过全文相似度来寻找相同或相似的代码][http://blog.startry.com/2016/12/14/find-same-code-by-simhash-and-hamming-distance/]
 

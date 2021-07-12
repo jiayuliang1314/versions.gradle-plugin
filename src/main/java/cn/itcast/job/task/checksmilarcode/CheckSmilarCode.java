@@ -63,7 +63,11 @@ public class CheckSmilarCode {
         FileUtils.cyclicTraversalPath(pathNew, new FileUtils.ControlFileCallback() {
             @Override
             public void control(File src_dir) throws Exception {
-                if (src_dir.getAbsolutePath().endsWith(".java") && !src_dir.getAbsolutePath().contains("build/")) {
+                if ((src_dir.getAbsolutePath().endsWith(".java") ||
+                        src_dir.getAbsolutePath().endsWith(".c") ||
+                        src_dir.getAbsolutePath().endsWith(".cpp") ||
+                        src_dir.getAbsolutePath().endsWith(".xml"))
+                        && !src_dir.getAbsolutePath().contains("build/")) {
                     String str1 = readAllFile(src_dir.getAbsolutePath());
                     SimHasher hash1 = new SimHasher(str1);
                     pathHashMapNew.put(src_dir.getAbsolutePath(), hash1);
@@ -73,7 +77,11 @@ public class CheckSmilarCode {
         FileUtils.cyclicTraversalPath(pathOld, new FileUtils.ControlFileCallback() {
             @Override
             public void control(File src_dir) throws Exception {
-                if (src_dir.getAbsolutePath().endsWith(".java") && !src_dir.getAbsolutePath().contains("build/")) {
+                if ((src_dir.getAbsolutePath().endsWith(".java") ||
+                        src_dir.getAbsolutePath().endsWith(".c") ||
+                        src_dir.getAbsolutePath().endsWith(".cpp") ||
+                        src_dir.getAbsolutePath().endsWith(".xml"))
+                        && !src_dir.getAbsolutePath().contains("build/")) {
                     String str1 = readAllFile(src_dir.getAbsolutePath());
                     SimHasher hash1 = new SimHasher(str1);
                     pathHashMapOld.put(src_dir.getAbsolutePath(), hash1);

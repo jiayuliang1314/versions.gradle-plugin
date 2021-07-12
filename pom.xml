@@ -10,7 +10,7 @@
     </parent>
     <groupId>versionsgradlechecker</groupId>
     <artifactId>versions-gradle-checker</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 
     <build>
         <plugins>
@@ -28,6 +28,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <includeSystemScope>true</includeSystemScope>
                     <executable>true</executable>
                 </configuration>
             </plugin>
@@ -41,6 +42,13 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>matrix</groupId>
+            <artifactId>matrix</artifactId>
+            <version>0.9.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/matrix-apk-canary-0.9.0.jar</systemPath>
+        </dependency>
         <!--WebMagic核心包-->
         <dependency>
             <groupId>us.codecraft</groupId>

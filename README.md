@@ -9,9 +9,17 @@
 
 2.Mac电脑使用命令行：
 
-//versions-gradle-checker-1.0.jar 项目1路径 项目2路径 结果位置
+### 分析两套代码
 
-versions-gradle-checker-1.0.jar /user/admin/project1 /user/admin/project2 /Users/admin/Documents/result.txt
+versions-gradle-checker-1.0.jar checkcode 项目1路径 项目2路径 结果位置
+
+versions-gradle-checker-1.0.jar checkcode /user/admin/project1 /user/admin/project2 /Users/admin/Documents/result.txt
+
+### 分析两个app
+
+versions-gradle-checker-1.0.jar checkapp 项目1路径 项目2路径 结果位置
+
+versions-gradle-checker-1.0.jar checkapp /user/admin/project1 /user/admin/project2 /Users/admin/Documents/result.txt
 
 3.结果：
 

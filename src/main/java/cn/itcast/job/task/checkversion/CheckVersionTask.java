@@ -4,14 +4,11 @@ import cn.itcast.job.cache.ConfigConstant;
 import cn.itcast.job.pojo.VersionsGradleLineBean;
 import cn.itcast.job.utils.FileUtil;
 import cn.itcast.job.utils.StringUtil;
-import org.jsoup.Jsoup;
 import us.codecraft.webmagic.*;
-import us.codecraft.webmagic.downloader.CustomRedirectStrategy;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.BloomFilterDuplicateRemover;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
-import us.codecraft.webmagic.selector.Selectable;
 
 import java.io.IOException;
 import java.security.Security;
@@ -24,6 +21,8 @@ import static cn.itcast.job.cache.ConfigConstant.File_OF_VERSION;
 import static cn.itcast.job.cache.ConfigConstant.REPORT_PATH;
 import static cn.itcast.job.cache.VersionsGradleInfosCache.*;
 import static cn.itcast.job.utils.StringUtil.search;
+
+//import cn.itcast.job.pojo.WanAndroidLibVersion;
 
 public class CheckVersionTask implements PageProcessor {
     //    private List<String> repos = new ArrayList<>();//用于输出仓库名，辅助用
@@ -73,15 +72,29 @@ public class CheckVersionTask implements PageProcessor {
                         mapOfLibrary.put(key, versionsGradleLineBean);
                         versionsGradleLineBean.setDuplicate(false);
 
-                        Request request = new Request(
-                                "https://mvnrepository.com/artifact/"
-                                        + versionsGradleLineBean.getGroupName()
+
+                        Request request2 = new Request(
+//                                "https://wanandroid.com/maven_pom/index?k=com.google.android.gms:play-services-analytics:");
+                                "https://repo.maven.apache.org/maven2/"
+                                        + versionsGradleLineBean.getGroupName().replace(".", "/")
                                         + "/"
+                                        + versionsGradleLineBean.getLibraryName().replace(".", "/"));
+                        request2.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
+                        request2.putExtra("groupName", versionsGradleLineBean.getGroupName());
+                        request2.putExtra("libraryName", versionsGradleLineBean.getLibraryName());
+                        requestList.add(request2);
+
+                        Request request = new Request(
+//                                "https://wanandroid.com/maven_pom/index?k=com.google.android.gms:play-services-analytics:");
+                                "https://wanandroid.com/maven_pom/index?k="
+                                        + versionsGradleLineBean.getGroupName()
+                                        + ":"
                                         + versionsGradleLineBean.getLibraryName());
                         request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
                         request.putExtra("groupName", versionsGradleLineBean.getGroupName());
                         request.putExtra("libraryName", versionsGradleLineBean.getLibraryName());
                         requestList.add(request);
+
                     } else {
                         versionsGradleLineBean.setDuplicate(true);
                     }
@@ -118,148 +131,99 @@ public class CheckVersionTask implements PageProcessor {
 
     @Override
     public void process(Page page) {
-        if (page.getStatusCode() != 200 || page.getRawText().contains("Not Found: /artifact/")
+        boolean result = page.getStatusCode() != 200 || page.getRawText().contains("Not Found: /artifact/")
                 || page.getRawText().contains("The requested path was not found.")
-                || page.getRawText().contains("404 Not Found")
-        ) {
-            VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
-            String groupName = (String) page.getRequest().getExtra("groupName");
-            String libraryName = (String) page.getRequest().getExtra("libraryName");
-            if (page.getStatusCode() != 404) {
-                String url = page.getUrl().toString();
-                System.out.println(url + "process happen Page status not 200 " + page.getStatusCode());
-            }
-            if (page.getRawText().contains("Not Found: /artifact/")) {
-                String url = page.getUrl().toString();
-                System.out.println(url + " Not Found: /artifact/");
-                //4.加上jcenter
-                {
-//                            Request request = new Request("https://jcenter.bintray.com/com/google/android/flexbox/");
-                    Request request = new Request("https://jcenter.bintray.com/" + groupName.replace(".", "/") + "/" + libraryName.replace(".", "/"));
-                    request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
-                    request.putExtra("groupName", groupName);
-                    request.putExtra("libraryName", libraryName);
-                    page.addTargetRequest(request);
-                }
-            }
-            if (page.getRawText().contains("The requested path was not found.")) {
-                String url = page.getUrl().toString();
-                System.out.println(url + " The requested path was not found.");
-                //5.加上jitpack
-                {
-//                    Request request = new Request("https://jitpack.io/com/github/jiayuliang1314/StrongToolsRecyclerView/");
-                    Request request = new Request("https://jitpack.io/" + groupName.replace(".", "/") + "/" + libraryName.replace(".", "/"));
-                    request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
-                    request.putExtra("groupName", groupName);
-                    request.putExtra("libraryName", libraryName);
-                    page.addTargetRequest(request);
-                }
-            }
-            if (page.getRawText().contains("404 Not Found")) {
-                String url = page.getUrl().toString();
-                System.out.println(url + " 404 Not Found");
-            }
+                || page.getRawText().contains("404 Not Found");
+
+        System.out.println(page.getUrl().toString() + "结果 " + !result);
+        if (result) {
+
         } else {
             String url = page.getUrl().toString();
-            if (url.startsWith("https://mvnrepository.com/artifact/")) {
-                processMvnrepository(page, url);
+            if (url.startsWith("https://wanandroid.com/maven_pom/index?k=")) {
+                processWanandroid(page, url);
             }
-            if (url.startsWith("https://jcenter.bintray.com/")) {
-                processJcenter(page, url);
-            }
-            if (url.startsWith("https://jitpack.io/")) {
-                processJitpack(page, url);
+            if (url.startsWith("https://repo.maven.apache.org/maven2/")) {
+                System.out.println("process maven apache " + url + " ");
+                processMavenApache(page, url);
             }
         }
     }
 
-    //region process
-    private void processJitpack(Page page, String url) {
-        //                System.out.println("link before " + url);
-        String companyRedirectWebsit = CustomRedirectStrategy.RedirectMap.get(url);
-//                System.out.println("link after " + companyRedirectWebsit);
+    private void processWanandroid(Page page, String url) {
         String version = "";
-//                <pre><a onclick="navi(event)" href=":2.0.1/" rel="nofollow">2.0.1/</a></pre>
+        //<td>implementation 'com.google.android.gms:play-services-analytics-impl:9.0.0'</td>
         try {
-            String[] items = Jsoup.parse(page.getHtml().css("body").get()).text().split("/");
-            version = items[items.length - 1].replace("/", "").trim();
+            List<String> items = page.getHtml().css("td").all();
+
+            if (items != null && items.size() >= 1) {
+                VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
+
+                for (int i = 0; i < items.size(); i++) {
+                    String line = items.get(i);
+                    if (line == null || line.isEmpty()) {
+                        continue;
+                    }
+                    String groupAndLibName = versionsGradleLineBean.getGroupName() + ":" + versionsGradleLineBean.getLibraryName() + ":";
+                    if (line.contains(groupAndLibName)) {
+                        int begin = line.indexOf(groupAndLibName) + groupAndLibName.length();
+                        int end = line.indexOf("'", begin);
+                        String tempVersion = line.substring(begin, end);
+                        if (!tempVersion.contains("alpha") && !tempVersion.contains("beta") && !tempVersion.contains("rc")) {
+                            version = tempVersion;
+                        }
+                    }
+                }
+            }
+            System.out.println("processWanandroid " + url + " " + version);
+            if (version != null && !version.isEmpty()) {
+                VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
+                versionsGradleLineBean.setLastVersion(version, url);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(url + " " + version);
-        VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
-        versionsGradleLineBean.setLastVersion(version, url);
     }
 
-    private void processJcenter(Page page, String url) {
-        //                System.out.println("link before " + url);
-        String companyRedirectWebsit = CustomRedirectStrategy.RedirectMap.get(url);
-//                System.out.println("link after " + companyRedirectWebsit);
+    private void processMavenApache(Page page, String url) {
         String version = "";
-//                <pre><a onclick="navi(event)" href=":2.0.1/" rel="nofollow">2.0.1/</a></pre>
+        //<td>implementation 'com.google.android.gms:play-services-analytics-impl:9.0.0'</td>
         try {
-            version = Jsoup.parse(page.getHtml().css("pre").nodes().get(page.getHtml().css("pre").nodes().size() - 2).get()).text().replace("/", "").trim();
+            List<String> items = page.getHtml().css("a", "title").all();
+
+            if (items != null && items.size() >= 1) {
+                VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
+
+                for (int i = items.size() - 1; i >= 0; i--) {
+                    String line = items.get(i);
+                    if (line == null || line.isEmpty()) {
+                        continue;
+                    }
+                    if (!line.startsWith("maven-metadata")) {
+                        version = line;
+                        break;
+                    }
+//                    String groupAndLibName = versionsGradleLineBean.getGroupName() + ":" + versionsGradleLineBean.getLibraryName() + ":";
+//                    if (line.contains(groupAndLibName)) {
+//                        int begin = line.indexOf(groupAndLibName) + groupAndLibName.length();
+//                        int end = line.indexOf("'", begin);
+//                        String tempVersion = line.substring(begin, end);
+//                        if (!tempVersion.contains("alpha") && !tempVersion.contains("beta") && !tempVersion.contains("rc")) {
+//                            version = tempVersion;
+//                        }
+//                    }
+                }
+            }
+            System.out.println("processMavenApache " + url + " " + version);
+            if (version != null && !version.isEmpty()) {
+                VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
+                versionsGradleLineBean.setLastVersion(version, url);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(url + " " + version);
-        VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
-        versionsGradleLineBean.setLastVersion(version, url);
     }
 
-    /**
-     * ok
-     *
-     * @param page
-     * @param url
-     */
-    private void processMvnrepository(Page page, String url) {
-        VersionsGradleLineBean versionsGradleLineBean = (VersionsGradleLineBean) page.getRequest().getExtra("VersionsGradleLineBean");
-        String groupName = (String) page.getRequest().getExtra("groupName");
-        String libraryName = (String) page.getRequest().getExtra("libraryName");
-
-        //                System.out.println("link before " + url);
-        String companyRedirectWebsit = CustomRedirectStrategy.RedirectMap.get(url);
-//                System.out.println("link after " + companyRedirectWebsit);
-        String version = "";
-//                <div class="main-footer-text page-centered"><p><a href="https://www.outreach.io/">Outreach Home Page</a></p><a href="https://lever.co/" class="image-link"><span>Jobs powered by </span><img alt="Lever logo" src="/img/lever-logo-full.svg"></a></div>
-        try {
-            String href = page.getHtml().css("a.vbtn.release").css("a", "href").get();
-            version = href.substring(href.lastIndexOf("/") + 1).trim();
-        } catch (Exception e) {
-            System.out.println(url + " happen Exception ");
-            e.printStackTrace();
-        }
-        System.out.println(url + " " + version);
-        versionsGradleLineBean.setLastVersion(version, url);
-
-        //1.打印出所有的tab,并添加到请求中
-        List<Selectable> selectables = page.getHtml().css("ul.tabs>li").nodes();
-        for (Selectable selectable : selectables) {
-            String href = selectable.css("a", "href").get();
-            System.out.println("processMvnrepository href " + href);
-            if (href.contains("=")) {
-//                repos.add(href.substring(href.lastIndexOf("=") + 1));
-            }
-            if (href.contains("Spring") || href.contains("spring") || href.contains("redhat") || href.contains("icm")) {
-                //springio-libs-release
-                //springio-plugins-release
-                //spring-libs-milestone
-                //redhat-ga
-                //redhat-earlyaccess
-                //icm
-                System.out.println("processMvnrepository Spring or Redhat meet " + href.substring(href.lastIndexOf("=") + 1));
-                continue;
-            }
-
-            Request request = new Request("https://mvnrepository.com" + href);
-            request.putExtra("VersionsGradleLineBean", versionsGradleLineBean);
-            request.putExtra("groupName", groupName);
-            request.putExtra("libraryName", libraryName);
-            page.addTargetRequest(request);
-        }
-    }
-    //endregion
 
     //region done
     public void done() {

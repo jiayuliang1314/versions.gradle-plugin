@@ -168,7 +168,7 @@ public class VersionsGradleLineBean implements Serializable, Cloneable {
         } else if (getLastVersion() == null ||
                 getLastVersion().equals(getVersion()) ||
                 getLastVersion().equals(getVersionListed())) {
-            return "";
+            return " 和目前一样 ";
         }
         return lastVersion;
     }

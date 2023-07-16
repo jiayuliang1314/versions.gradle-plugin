@@ -17,16 +17,16 @@ public class Application {
         }
         if (false) {
             try {
-                checkVersionTask.process("/Users/admin/Documents/02-网络爬虫/workspace/new_version_check2/doc/checkversionutils/versions.gradle",
-                        "/Users/admin/Documents/02-网络爬虫/workspace/new_version_check2/doc/checkversionutils/dependices.txt",
-                        "/Users/admin/Documents/02-网络爬虫/workspace/new_version_check2/doc/checkversionutils/report.html");
+                checkVersionTask.process("/Volumes/T7 Shield/2023_Android/wavely/versions.gradle",
+                        "/Volumes/T7 Shield/2023_Android/wavely/dependices.txt",
+                        "/Volumes/T7 Shield/2023_Android/wavely/report.html");
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return;
         }
         if (args == null || args.length == 0) {
-            System.out.println("Please use like \n versions-gradle-checker-1.0.jar /admin/project/demo/version.gradle /admin/project/demo/dependices.txt /admin/project/demo/report.html");
+            System.out.println("Please use like \n versions-gradle-checker-3.0.jar /admin/project/demo/version.gradle /admin/project/demo/dependices.txt /admin/project/demo/report.html");
             return;
         }
 

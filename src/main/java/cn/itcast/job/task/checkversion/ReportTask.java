@@ -5,10 +5,7 @@ import cn.itcast.job.pojo.dependices.DependicesNode;
 import cn.itcast.job.utils.CollectionsUtils;
 import cn.itcast.job.utils.FileUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 import static cn.itcast.job.cache.ConfigConstant.REPORT_PATH;
 import static cn.itcast.job.cache.VersionsGradleInfosCache.*;
@@ -61,6 +58,18 @@ public class ReportTask {
                 "<td>" + "Link" + "</td>\n" +
                 "<td>" + "ManyLibUseSameVersionButTheyAreNotSame" + "</td>\n" +
                 "</tr>\n";
+//        Collections.sort(gradleLineBeans, new Comparator<VersionsGradleLineBean>() {
+//            @Override
+//            public int compare(VersionsGradleLineBean o1, VersionsGradleLineBean o2) {
+//                if (o1.getGroupAndLibraryName() == null) {
+//                    return -1;
+//                }
+//                if (o2.getGroupAndLibraryName() == null) {
+//                    return 1;
+//                }
+//                return o1.getGroupAndLibraryName().compareTo(o2.getGroupAndLibraryName());
+//            }
+//        });
         for (VersionsGradleLineBean versionsGradleLineBean : gradleLineBeans) {
             if (versionsGradleLineBean != null && !versionsGradleLineBean.isDuplicate() && versionsGradleLineBean.getGroupAndLibraryName() != null && versionsGradleLineBean.getGroupAndLibraryName().length() > 0) {
                 detail += "<tr>\n" +
@@ -118,6 +127,12 @@ public class ReportTask {
             detail += "<br>";
         }
 
+//        for (int i = gradleLineBeans.size() - 1; i >= 0; i--) {
+//            System.out.println(gradleLineBeans.get(i));
+//            detail += gradleLineBeans.get(i).getHtml();
+//            detail += "<br>";
+//        }
+
         detail += "<br><h1>4.  versions.gradle 文件格式化</h1><br>";
 
         List<VersionsGradleLineBean> gradleLineBeansCopy = new ArrayList<>();
@@ -142,6 +157,13 @@ public class ReportTask {
             detail += versionsGradleLineBean.getFormatKeyVersion();
             detail += "<br>";
         }
+
+//        for (int i = gradleLineBeansCopy.size() - 1; i >= 0; i--) {
+//            System.out.println(gradleLineBeansCopy.get(i));
+//            detail += gradleLineBeansCopy.get(i).getHtml();
+//            detail += "<br>";
+//        }
+
 
         String content = "<html>\n" +
                 "<head>\n" +

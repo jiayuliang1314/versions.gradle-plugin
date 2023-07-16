@@ -23,14 +23,13 @@ public class DependicesNode {
     public String moudle;//androidx.databinding
     public String library;//databinding-adapters
     public String version;//3.6.1
-//    (*) - is used to indicate that particular dependency is described somewhere else in the tree
+    //    (*) - is used to indicate that particular dependency is described somewhere else in the tree
 //     -> - is used to point the dependency that wins in version conflict.
     public boolean isHaveStar;//(*) 是否含有星号标记
     public boolean isHaveArrow;//-> 是否含有箭号标记
     public String versionAfterArrow;//箭号后边的版本
     public boolean isRoot;//是否是根结点
     public boolean isProjectOrLib;//是否是根结点
-
 
 
     public DependicesNode parent;//父节点
@@ -59,6 +58,9 @@ public class DependicesNode {
             int frist = detail.indexOf(":");
             int second = detail.indexOf(":", frist + 1);
             moudle = detail.substring(0, frist);
+            if (second == -1) {
+                second = detail.indexOf(" ", frist + 1);
+            }
             library = detail.substring(frist + 1, second);
             String detailVersion = detail.substring(second + 1);
             isHaveStar = false;
